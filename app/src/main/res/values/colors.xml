@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="colorPrimaryDark">#ADD899</color>
+    <color name="colorBlack">#000000</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="teal_200">#FFA27F</color>
+    <color name="black">#0C0C0C</color>
+    <color name="purple_200">#5C88C4</color>
+    <color name="teal_700">#D1D8C5</color>
+    <color name="purple_500">#CDE8E5</color>
+    <color name="white">#fff</color>
+    <color name="purple_700">#89C4E1</color>
+    <color name="colorRed">#EEF296</color>
+    <color name="blue">#FFE5E5</color>
+    <color name="bbcolor">#FA9E9E</color>
+    <color name="greencolor">#478C2E</color>
+    <color name="address">#BEF0CB</color>
+    <color name="followers">#874CCC</color>
+    <color name="headings">#3797CF</color>
+    <color name="solidCircle">#AAFFFFFF</color>
+    <color name="circleBorder">#50FFFFFF</color>
+    <color name="gradEnd">#609EA2</color>
+    <color name="gradStart">#4E6E81</color>
+    <color name="followersBg">#FFEAEA</color>
+    <color name="followingBg">#F7D060</color>
+    <color name="grey">#E5E5E5</color>
+    <color name="transparent_black">#5C787676</color>
+
+
+
+
+</resources>
