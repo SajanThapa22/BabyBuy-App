@@ -1,6 +1,9 @@
 # babybuy
+
 ## Note: we need to installed Android Studio to run this android mobile application
+
                                                                 **Scenario**
+
 **BabyBuy**
 
 You have been commissioned to create an app that will help parents create a list of items they need to buy
@@ -45,12 +48,3 @@ Optional Desirable Requirements for the app:
 ● To include a full range of appropriate gesture control to improve the management of items. For
 example, shake to clear an entry, swipe right to mark as purchased, swipe left to delete
 There is no associated logo or house style for this app yet so you have free reign over the appearance.
-
-
-**Project Demonstration (Photos):**
-https://github.com/ganeshsapkota/babybuy/issues/1#issuecomment-1374755162
-
-**Video Demonstration**
-https://youtu.be/pxlo9VoYMB0
-
-
