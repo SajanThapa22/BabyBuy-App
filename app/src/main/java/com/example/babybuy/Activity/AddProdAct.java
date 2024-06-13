@@ -54,7 +54,7 @@ public class AddProdAct extends AppCompatActivity implements OnMapReadyCallback 
     TextView productaddcamera, productaddgallery;
     Button productaddbtn;
     ImageView productaddimage, backicon;
-    EditText productaddname, productadddes, productaddquantity, productaddprice;
+    EditText productaddname, productadd, productaddquantity, productaddprice;
     final int CAMERA_CODE = 100;
     final int GALLERY_CODE = 200;
     Double lat, lng;
@@ -68,15 +68,15 @@ public class AddProdAct extends AppCompatActivity implements OnMapReadyCallback 
         //category id value from Intent data pass
         int procatidlist = getIntent().getExtras().getInt("pcid");
 
-        //Database connection
+        //Connection to database
         Database db = new Database(this);
 
-        //id connected
+        //connecting IDs
         productaddbtn = findViewById(R.id.productaddbtnid);
         productaddname = findViewById(R.id.productaddtitleid);
         productaddquantity = findViewById(R.id.productaddquantityid);
         productaddprice = findViewById(R.id.productaddpriceid);
-        productadddes = findViewById(R.id.productadddesid);
+        productadd = findViewById(R.id.productadddesid);
         productaddimage = findViewById(R.id.productaddimageid);
         productaddgallery = findViewById(R.id.productaddfromgallery);
         productaddcamera = findViewById(R.id.productaddfromcamera);
@@ -111,7 +111,7 @@ public class AddProdAct extends AppCompatActivity implements OnMapReadyCallback 
             productDataModel.setProductname(productaddname.getText().toString());
             productDataModel.setProductquantity(Integer.parseInt(productaddquantity.getText().toString()));
             productDataModel.setProductprice(Double.parseDouble(productaddprice.getText().toString()));
-            productDataModel.setProductdescription(productadddes.getText().toString());
+            productDataModel.setProductdescription(productadd.getText().toString());
             productDataModel.setProductstatus(prdstatus);
             productDataModel.setProductcategoryid(procatidlist);
             productDataModel.setProductlat(lat);

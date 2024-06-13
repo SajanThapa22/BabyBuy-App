@@ -17,8 +17,8 @@ import com.example.babybuy.R;
 import com.example.babybuy.Database.Database;
 
 public class RegisterAct extends AppCompatActivity {
-    EditText Efname, Elname, Eemail, Epassword, Ecpassword;
-    Button rbtn;
+    EditText Username, Userlastname, Useremail, Userpassword, Usercpassword;
+    Button rdrbtn;
     TextView redirecttologin;
 
     @Override
@@ -28,38 +28,38 @@ public class RegisterAct extends AppCompatActivity {
         Database db = new Database(this);
 
         //For input value
-        Efname = findViewById(R.id.smobile);
-        Elname = findViewById(R.id.stitle);
-        Eemail = findViewById(R.id.sdescription);
-        Epassword = findViewById(R.id.squnatity);
-        Ecpassword = findViewById(R.id.sprice);
+        Username = findViewById(R.id.smobile);
+        Userlastname = findViewById(R.id.stitle);
+        Useremail = findViewById(R.id.sdescription);
+        Userpassword = findViewById(R.id.squnatity);
+        Usercpassword = findViewById(R.id.sprice);
 
-        //change notification color
+        //inorder to change notification color
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = this.getWindow();
             window.setStatusBarColor(this.getResources().getColor(R.color.greencolor));
         }
 
 
-        //For Registration and Login redirection Button
-        rbtn = findViewById(R.id.btnsendsms);
+        //to register and redirect to login
+        rdrbtn = findViewById(R.id.btnsendsms);
         redirecttologin = findViewById(R.id.rsingup);
 
         //Clicklistner add for register button
-        rbtn.setOnClickListener(new View.OnClickListener() {
+        rdrbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                //define string for input
-                String fname = Efname.getText().toString();
-                String lname = Elname.getText().toString();
-                String email = Eemail.getText().toString();
-                String password = Epassword.getText().toString();
-                String cpassword = Ecpassword.getText().toString();
+                //declaring string for all input fields name, lastname, password, confirm password
+                String firstname = Username.getText().toString();
+                String lastname = Userlastname.getText().toString();
+                String email = Useremail.getText().toString();
+                String password = Userpassword.getText().toString();
+                String cpassword = Usercpassword.getText().toString();
 
 
                 //Emtpy value checked
-                if (fname.isEmpty() || lname.isEmpty() || email.isEmpty() || password.isEmpty() || cpassword.isEmpty()) {
+                if (firstname.isEmpty() || lastname.isEmpty() || email.isEmpty() || password.isEmpty() || cpassword.isEmpty()) {
                     Toast.makeText(RegisterAct.this, "Enter all data", Toast.LENGTH_SHORT).show();
                 } else {
 
@@ -78,7 +78,7 @@ public class RegisterAct extends AppCompatActivity {
                                     Toast.makeText(RegisterAct.this, "user already exist", Toast.LENGTH_SHORT).show();
                                 } else {
                                     //insert data to Database
-                                    boolean i = db.insert(fname, lname, email, password);
+                                    boolean i = db.insert(firstname, lastname, email, password);
                                     // after successfully inserted
                                     if (i == true) {
                                         Toast.makeText(RegisterAct.this, "successfully update", Toast.LENGTH_SHORT).show();
@@ -93,21 +93,21 @@ public class RegisterAct extends AppCompatActivity {
                             }
                             //incase password and confirm password
                             else {
-                                Ecpassword.setError("confirm password doesn't match");
+                                Usercpassword.setError("confirm password doesn't match");
                                 Toast.makeText(RegisterAct.this, "confirm password doesn't match", Toast.LENGTH_SHORT).show();
                             }
                         }
 
                         //if password length doesn't match
                         else {
-                            Epassword.setError("minimum 8 length");
+                            Userpassword.setError("minimum 8 length");
                             Toast.makeText(RegisterAct.this, "Enter 8 digit password", Toast.LENGTH_SHORT).show();
                         }
                     }
 
                     //if user didn't enter valid email address
                     else {
-                        Eemail.setError("enter valid email");
+                        Useremail.setError("enter valid email");
                         Toast.makeText(RegisterAct.this, "Enter valid email", Toast.LENGTH_SHORT).show();
                     }
                 }

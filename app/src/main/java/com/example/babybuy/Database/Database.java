@@ -264,7 +264,6 @@ public class Database extends SQLiteOpenHelper {
             prod.setProductdescription(getdata.getString(4));
             prod.setProductstatus(getdata.getInt(5));
             prod.setProductimage(getdata.getBlob(6));
-
             productarray.add(prod);
         }
         return productarray;
@@ -337,7 +336,7 @@ public class Database extends SQLiteOpenHelper {
         return productarray;
     }
 
-    //update method for category
+    //update method for product
     public int updateproduct(ProductDataModel productDataModel, int productid) {
         SQLiteDatabase udb = getWritableDatabase();
         ContentValues v = new ContentValues();

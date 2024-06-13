@@ -5,18 +5,14 @@
     android:layout_height="wrap_content"
     android:layout_margin="2dp"
     android:orientation="vertical"
-    android:background="@color/transparent_black"
+    android:background="#A3A1A1"
     android:padding="@dimen/_5sdp">
-
-
-
 
         <ImageView
             android:id="@+id/ccatimage"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:scaleType="fitXY"/>
-
+            android:layout_height="150dp"
+            android:scaleType="centerCrop"/>
 
     <TextView
         android:id="@+id/designcatname"
@@ -24,11 +20,11 @@
         android:layout_height="wrap_content"
         android:ellipsize="end"
         android:text="Hello"
-        android:textColor="@color/black"
+        android:textColor="#fff"
         android:fontFamily="sans-serif-medium"
         android:gravity="center|bottom"
         android:singleLine="true"
         android:textAlignment="center"
-        android:textSize="10sp" />
+        android:textSize="20sp" />
 </LinearLayout>
 

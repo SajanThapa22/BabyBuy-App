@@ -79,7 +79,7 @@ public class ProdListAct extends AppCompatActivity {
         product_recy.setLayoutManager(new LinearLayoutManager(this));
         //swipe function
         new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(product_recy);
-        //add Database data to adapter
+        //adding data fetched to the adapter
         adapter = new ProdListAdapter(this, alldata);
 
         //add adapter to view
@@ -110,8 +110,7 @@ public class ProdListAct extends AppCompatActivity {
         public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
             return false;
         }
-
-
+        //Gesture handler for product List
         @SuppressLint("NotifyDataSetChanged")
         @Override
         public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
@@ -123,6 +122,8 @@ public class ProdListAct extends AppCompatActivity {
 
             switch (direction) {
                 case ItemTouchHelper.LEFT:
+
+                    //To Delete Product
                     db.deleteproduct(productIdswipe);
                     alldata.remove(position);
                     product_recy.getAdapter().notifyItemRemoved(position);

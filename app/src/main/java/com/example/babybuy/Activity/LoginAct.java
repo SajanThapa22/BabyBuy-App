@@ -17,8 +17,8 @@ import com.example.babybuy.Database.Database;
 import com.example.babybuy.R;
 
 public class LoginAct extends AppCompatActivity {
-    EditText Eemail, Epassword;
-    Button Blogin, Bsignup;
+    EditText Useremail, Userpassword;
+    Button Btnlogin, Btnsignup;
     String email, password;
 
     @Override
@@ -26,24 +26,24 @@ public class LoginAct extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         Database db = new Database(this);
-        Eemail = findViewById(R.id.inputEmail);
-        Epassword = findViewById(R.id.inputPassword);
-        Blogin = findViewById(R.id.btn);
-        Bsignup = findViewById(R.id.losignup);
+        Useremail = findViewById(R.id.inputEmail);
+        Userpassword = findViewById(R.id.inputPassword);
+        Btnlogin = findViewById(R.id.btn);
+        Btnsignup = findViewById(R.id.losignup);
 
-        //change notification color
+        //to change notification color
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = this.getWindow();
             window.setStatusBarColor(this.getResources().getColor(R.color.greencolor));
         }
-
-        Blogin.setOnClickListener(new View.OnClickListener() {
+        //setting onClickListener on login button
+        Btnlogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 //Converted edittext to string
-                email = Eemail.getText().toString();
-                password = Epassword.getText().toString();
+                email = Useremail.getText().toString();
+                password = Userpassword.getText().toString();
 
 
                 //if condition for null value in edittext
@@ -71,27 +71,24 @@ public class LoginAct extends AppCompatActivity {
                 //if email pattern is wrong show this message
                 else {
                     Toast.makeText(LoginAct.this, "Please re-enter your email ", Toast.LENGTH_LONG).show();
-                    Eemail.setError(" Valid email is required");
+                    Useremail.setError(" Valid email is required");
                 }
             }
         });
-
-        Bsignup.setOnClickListener(new View.OnClickListener() {
+        //setting onClickListener on signup button
+        Btnsignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(LoginAct.this, RegisterAct.class));
             }
         });
     }
-
-
     public void getemail() {
         SharedPreferences sp = getSharedPreferences("Login", MODE_PRIVATE);
         SharedPreferences.Editor Ed = sp.edit();
         Ed.putString("email", email);
         Ed.apply();
     }
-
 
     @Override
     public void onBackPressed() {
