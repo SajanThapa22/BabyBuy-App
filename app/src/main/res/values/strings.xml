@@ -107,6 +107,16 @@
     <string name="view_by_category">View By Category</string>
     <string name="todo">TODO</string>
     <string name="purchased">Purchased</string>
+    <string name="name">Name</string>
+    <string name="description">Description</string>
+    <string name="price">Price</string>
+    <string name="quantity">Quantity</string>
+    <string name="add_product">Add Product</string>
+    <string name="babybuy">BabyBuy</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="signup">signup</string>
 
     <style name="TextViewLargeExtraRegularCommon">
         <item name="android:textColor">@color/black</item>

@@ -18,28 +18,28 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Babybuy">
         <activity
-            android:name=".Activity.MainAct"
+            android:name=".Activity.MainActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".Activity.UpdateProdAct"
+            android:name=".Activity.UpdateItemAct"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".Activity.SmsAct"
+            android:name=".Activity.MessageActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".Activity.MapAct"
+            android:name=".Activity.GoogleMapAct"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -51,35 +51,35 @@
             android:value="AIzaSyB8Zp_xB5VjC-sgVqsPeLxOyxRnfvqCasE" />
 
         <activity
-            android:name=".Activity.HomeAct"
+            android:name=".Activity.HomeActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".Activity.AddProdAct"
+            android:name=".Activity.ItemAddActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".Activity.RegisterAct"
+            android:name=".Activity.RegisterActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".Activity.ProdListAct"
+            android:name=".Activity.ItemListActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".Activity.LoginAct"
+            android:name=".Activity.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

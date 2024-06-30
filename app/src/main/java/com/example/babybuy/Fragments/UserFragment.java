@@ -44,7 +44,7 @@ public class UserFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_user, container, false);
+        View view = inflater.inflate(R.layout.user_profile, container, false);
         userfragFullname = view.findViewById(R.id.userfragfullname);
         userfragEmail = view.findViewById(R.id.userfragEmail);
         userfragFullnameforlogo = view.findViewById(R.id.tv_name);

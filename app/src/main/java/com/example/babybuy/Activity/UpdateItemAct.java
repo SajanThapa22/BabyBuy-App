@@ -22,7 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.babybuy.Database.Database;
-import com.example.babybuy.Model.ProductDataModel;
+import com.example.babybuy.Model.ItemDataModel;
 import com.example.babybuy.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -37,7 +37,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class UpdateProdAct extends AppCompatActivity implements OnMapReadyCallback {
+public class UpdateItemAct extends AppCompatActivity implements OnMapReadyCallback {
 
     SupportMapFragment smf;
     FusedLocationProviderClient client;
@@ -45,7 +45,7 @@ public class UpdateProdAct extends AppCompatActivity implements OnMapReadyCallba
     NetworkInfo networkInfo;
     ConnectivityManager manager;
     List<Address> address;
-    ArrayList<ProductDataModel> pdm;
+    ArrayList<ItemDataModel> pdm;
     Database db;
     Geocoder geocoder;
     TextView productaddcamera, productaddgallery;
@@ -55,13 +55,13 @@ public class UpdateProdAct extends AppCompatActivity implements OnMapReadyCallba
     final int CAMERA_CODE = 100;
     final int GALLERY_CODE = 200;
     Double lat, lng;
-    ProductDataModel productDataModel;
+    ItemDataModel productDataModel;
     Integer id, catid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_update_product);
+        setContentView(R.layout.activity_update_item);
         id = getIntent().getExtras().getInt("productid");
         catid = getIntent().getExtras().getInt("pcid");
         db = new Database(this);
@@ -78,10 +78,10 @@ public class UpdateProdAct extends AppCompatActivity implements OnMapReadyCallba
         productaddquantity = findViewById(R.id.productupdatequantityid);
         productadddes = findViewById(R.id.productuodatedesid);
         productaddprice = findViewById(R.id.productupdatepriceid);
-        productaddimage = findViewById(R.id.productupdateimageid);
+        productaddimage = findViewById(R.id.itemupdateimgid);
         productaddgallery = findViewById(R.id.productupdatefromgallery);
         productaddcamera = findViewById(R.id.productupdatefromcamera);
-        backicon = findViewById(R.id.ubackimgf);
+        backicon = findViewById(R.id.upbgimg);
 
 
         //add product image from gallery
@@ -96,12 +96,12 @@ public class UpdateProdAct extends AppCompatActivity implements OnMapReadyCallba
             Intent icamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             startActivityForResult(icamera, CAMERA_CODE);
         });
-        smf = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.google_map);
+        smf = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.location_map);
         smf.getMapAsync(this);
 
         productupdatebtn.setOnClickListener(v -> {
-            AddProdAct adp = new AddProdAct();
-            productDataModel = new ProductDataModel();
+            ItemAddActivity adp = new ItemAddActivity();
+            productDataModel = new ItemDataModel();
             productDataModel.setProductimage(adp.convertImageViewToByteArray(productaddimage));
             productDataModel.setProductname(productaddname.getText().toString());
             productDataModel.setProductquantity(Integer.parseInt(productaddquantity.getText().toString()));
@@ -117,7 +117,7 @@ public class UpdateProdAct extends AppCompatActivity implements OnMapReadyCallba
                 Toast.makeText(this, "failed", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(this, "Succcess", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(UpdateProdAct.this, ProdListAct.class);
+                Intent intent = new Intent(UpdateItemAct.this, ItemListActivity.class);
                 intent.putExtra("pcid", pdm.get(0).getProductcategoryid());
                 startActivity(intent);
             }
@@ -125,7 +125,7 @@ public class UpdateProdAct extends AppCompatActivity implements OnMapReadyCallba
 
         //back to productlistactivity
         backicon.setOnClickListener(v -> {
-            Intent intent = new Intent(UpdateProdAct.this, ProdListAct.class);
+            Intent intent = new Intent(UpdateItemAct.this, ItemListActivity.class);
             intent.putExtra("pcid", pdm.get(0).getProductcategoryid());
             startActivity(intent);
         });
@@ -198,7 +198,7 @@ public class UpdateProdAct extends AppCompatActivity implements OnMapReadyCallba
 
 
     public void getitemlocation(Double mlat, Double mlng) throws IOException {
-        geocoder = new Geocoder(UpdateProdAct.this, Locale.getDefault());
+        geocoder = new Geocoder(UpdateItemAct.this, Locale.getDefault());
         if (mlat != 0) {
             address = geocoder.getFromLocation(mlat, mlng, 1);
             if (address != null) {
@@ -236,7 +236,7 @@ public class UpdateProdAct extends AppCompatActivity implements OnMapReadyCallba
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(UpdateProdAct.this, ProdListAct.class);
+        Intent intent = new Intent(UpdateItemAct.this, ItemListActivity.class);
         intent.putExtra("pcid", pdm.get(0).getProductcategoryid());
         startActivity(intent);
     }

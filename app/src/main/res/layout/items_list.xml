@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/babybuy_register_background"
     android:orientation="vertical"
-    tools:context=".Fragments.ManProdFragment">
+    tools:context=".Fragments.ManItemFragment">
 
 
 

@@ -15,7 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.babybuy.Database.Database;
-import com.example.babybuy.Model.ProductDataModel;
+import com.example.babybuy.Model.ItemDataModel;
 import com.example.babybuy.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -31,7 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class MapAct extends AppCompatActivity implements OnMapReadyCallback {
+public class GoogleMapAct extends AppCompatActivity implements OnMapReadyCallback {
 
     SupportMapFragment smf;
     FusedLocationProviderClient client;
@@ -44,7 +44,7 @@ public class MapAct extends AppCompatActivity implements OnMapReadyCallback {
     String selectedaddress, newitem = "";
     Database db;
     int procatid;
-    ArrayList<ProductDataModel> productDataModels;
+    ArrayList<ItemDataModel> productDataModels;
     ImageView backimg;
     String  product;
 
@@ -67,7 +67,7 @@ public class MapAct extends AppCompatActivity implements OnMapReadyCallback {
 
         // getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         smf = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.google_map);
+                .findFragmentById(R.id.location_map);
         client = LocationServices
                 .getFusedLocationProviderClient(this);
 
@@ -76,9 +76,9 @@ public class MapAct extends AppCompatActivity implements OnMapReadyCallback {
         smf.getMapAsync(this);
 
 
-        backimg = findViewById(R.id.mbackimgf);
+        backimg = findViewById(R.id.mbgimg);
         backimg.setOnClickListener(view -> {
-            startActivity(new Intent(MapAct.this, MainAct.class));
+            startActivity(new Intent(GoogleMapAct.this, MainActivity.class));
         });
 
     }
@@ -87,7 +87,7 @@ public class MapAct extends AppCompatActivity implements OnMapReadyCallback {
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
         mgoogleMap = googleMap;
-        db = new Database(MapAct.this);
+        db = new Database(GoogleMapAct.this);
         productDataModels = db.productfetchdataformapload(procatid);
         productlat = productDataModels.get(0).getProductlat();
         productlng = productDataModels.get(0).getProductlong();
@@ -108,7 +108,7 @@ public class MapAct extends AppCompatActivity implements OnMapReadyCallback {
 
 
     private void GetAddress(double mlat, double mlng) throws IOException {
-        geocoder = new Geocoder(MapAct.this, Locale.getDefault());
+        geocoder = new Geocoder(GoogleMapAct.this, Locale.getDefault());
         if (mlat != 0) {
             address = geocoder.getFromLocation(mlat, mlng, 1);
             if (address != null) {
@@ -149,7 +149,7 @@ public class MapAct extends AppCompatActivity implements OnMapReadyCallback {
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(MapAct.this, MainAct.class);
+        Intent intent = new Intent(GoogleMapAct.this, MainActivity.class);
         startActivity(intent);
     }
 

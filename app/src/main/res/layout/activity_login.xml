@@ -5,13 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#68958D8D"
-    tools:context="com.example.babybuy.Activity.LoginAct">
+    tools:context="com.example.babybuy.Activity.LoginActivity">
 
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="BabyBuy"
+        android:text="@string/babybuy"
         android:textColor="@color/purple_200"
         android:textSize="60sp"
         
@@ -24,7 +24,7 @@
 
 
     <ImageView
-        android:id="@+id/logo"
+        android:id="@+id/babybuylogo"
         android:layout_width="195dp"
         android:layout_height="160dp"
         android:layout_gravity="center"
@@ -39,19 +39,18 @@
 
 
     <EditText
-        android:id="@+id/inputEmail"
+        android:id="@+id/enteremail"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
-        android:background="@drawable/ic_input_bg"
+        android:background="@color/bg_gray"
         android:backgroundTint="#43555233"
         android:drawableLeft="@drawable/ic_email"
         android:drawablePadding="10dp"
         android:ems="18"
-        android:fontFamily="sans-serif-medium"
-        android:hint="Email"
+        android:hint="@string/email"
         android:hyphenationFrequency="normal"
         android:paddingLeft="5dp"
         android:minHeight="48dp"
@@ -61,21 +60,20 @@
         android:textColorHint="@color/colorWhite"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logo"
+        app:layout_constraintTop_toBottomOf="@+id/babybuylogo"
         tools:ignore="TouchTargetSizeCheck" />
 
     <EditText
-        android:id="@+id/inputPassword"
+        android:id="@+id/enterpassword"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:background="@drawable/ic_input_bg"
+        android:background="@color/bg_gray"
         android:backgroundTint="#43555233"
         android:drawableLeft="@drawable/ic_person"
         android:drawablePadding="10dp"
         android:ems="10"
-        android:fontFamily="sans-serif-medium"
-        android:hint="Password"
+        android:hint="@string/password"
         android:inputType="textPassword"
         android:minHeight="48dp"
         android:paddingLeft="5dp"
@@ -84,38 +82,37 @@
         android:paddingBottom="10dp"
         android:textColor="#fff"
         android:textColorHint="#fff"
-        app:layout_constraintEnd_toEndOf="@+id/inputEmail"
-        app:layout_constraintStart_toStartOf="@+id/inputEmail"
-        app:layout_constraintTop_toBottomOf="@+id/inputEmail" />
+        app:layout_constraintEnd_toEndOf="@+id/enteremail"
+        app:layout_constraintStart_toStartOf="@+id/enteremail"
+        app:layout_constraintTop_toBottomOf="@+id/enteremail" />
 
 
     <Button
-        android:id="@+id/btn"
+        android:id="@+id/btnlog"
         android:layout_width="341dp"
         android:layout_height="64dp"
         android:layout_marginTop="50dp"
         android:backgroundTint="#4CAF50"
-        android:text="Login"
+        android:text="@string/login"
         android:textSize="25sp"
         android:textColor="#fff"
-        app:layout_constraintEnd_toEndOf="@id/inputPassword"
-        app:layout_constraintStart_toStartOf="@id/inputPassword"
-        app:layout_constraintTop_toBottomOf="@+id/inputPassword" />
+        app:layout_constraintEnd_toEndOf="@id/enterpassword"
+        app:layout_constraintStart_toStartOf="@id/enterpassword"
+        app:layout_constraintTop_toBottomOf="@+id/enterpassword" />
 
 
     <Button
-        android:id="@+id/losignup"
+        android:id="@+id/btnsignup"
         android:layout_width="346dp"
         android:layout_height="69dp"
         android:layout_marginTop="110dp"
         android:backgroundTint="#4CAF50"
-
-        android:text="signup"
+        android:text="@string/signup"
         android:textSize="25sp"
         android:textColor="#fff"
-        app:layout_constraintEnd_toEndOf="@id/inputPassword"
-        app:layout_constraintStart_toStartOf="@id/inputPassword"
-        app:layout_constraintTop_toBottomOf="@+id/inputPassword" />
+        app:layout_constraintEnd_toEndOf="@id/enterpassword"
+        app:layout_constraintStart_toStartOf="@id/enterpassword"
+        app:layout_constraintTop_toBottomOf="@+id/enterpassword" />
 
 
 

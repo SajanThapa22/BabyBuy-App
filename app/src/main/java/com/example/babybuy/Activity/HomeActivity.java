@@ -10,7 +10,7 @@ import android.view.Window;
 
 import com.example.babybuy.R;
 
-public class HomeAct extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity {
 
     Handler handler;
     @Override
@@ -18,7 +18,6 @@ public class HomeAct extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        //change notification color
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = this.getWindow();
             window.setStatusBarColor(this.getResources().getColor(R.color.greencolor));
@@ -28,7 +27,7 @@ public class HomeAct extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent=new Intent(HomeAct.this, LoginAct.class);
+                Intent intent=new Intent(HomeActivity.this, LoginActivity.class);
                 startActivity(intent);
                 finish();
             }

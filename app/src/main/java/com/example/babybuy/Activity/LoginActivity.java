@@ -16,7 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.babybuy.Database.Database;
 import com.example.babybuy.R;
 
-public class LoginAct extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
     EditText Useremail, Userpassword;
     Button Btnlogin, Btnsignup;
     String email, password;
@@ -26,12 +26,12 @@ public class LoginAct extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         Database db = new Database(this);
-        Useremail = findViewById(R.id.inputEmail);
-        Userpassword = findViewById(R.id.inputPassword);
-        Btnlogin = findViewById(R.id.btn);
-        Btnsignup = findViewById(R.id.losignup);
+        Useremail = findViewById(R.id.enteremail);
+        Userpassword = findViewById(R.id.enterpassword);
+        Btnlogin = findViewById(R.id.btnlog);
+        Btnsignup = findViewById(R.id.btnsignup);
 
-        //to change notification color
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = this.getWindow();
             window.setStatusBarColor(this.getResources().getColor(R.color.greencolor));
@@ -46,31 +46,31 @@ public class LoginAct extends AppCompatActivity {
                 password = Userpassword.getText().toString();
 
 
-                //if condition for null value in edittext
+                //for checking null value in input in email and password
                 if (email.isEmpty() || password.isEmpty()) {
-                    Toast.makeText(LoginAct.this, "Enter username and Password", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Enter username and Password", Toast.LENGTH_SHORT).show();
                 }
 
-                //Email pattern and password length checked
+                //email and password check
                 else if (Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
 
-                    //created boolean variable for pop up message when login success or not
+
                     boolean i = db.checkemailandpassword(email, password);
                     if (i == true) {
-                        Toast.makeText(LoginAct.this, "Login Success", Toast.LENGTH_SHORT).show();
-                        Intent ilogin = new Intent(LoginAct.this, MainAct.class);
+                        Toast.makeText(LoginActivity.this, "Login Success", Toast.LENGTH_SHORT).show();
+                        Intent ilogin = new Intent(LoginActivity.this, MainActivity.class);
                         // ilogin.putExtra("Email", email);
                         getemail();
                         startActivity(ilogin);
                     } else {
-                        Toast.makeText(LoginAct.this, "Invalid Credential", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this, "Invalid Credential", Toast.LENGTH_SHORT).show();
                     }
                 }
 
 
-                //if email pattern is wrong show this message
+                //if email is incorrect, showing error message
                 else {
-                    Toast.makeText(LoginAct.this, "Please re-enter your email ", Toast.LENGTH_LONG).show();
+                    Toast.makeText(LoginActivity.this, "Please re-enter your email ", Toast.LENGTH_LONG).show();
                     Useremail.setError(" Valid email is required");
                 }
             }
@@ -79,7 +79,7 @@ public class LoginAct extends AppCompatActivity {
         Btnsignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(LoginAct.this, RegisterAct.class));
+                startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
             }
         });
     }

@@ -4,16 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.HomeAct">
+    tools:context=".Activity.HomeActivity">
 
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/roundCardView"
-        android:layout_width="409dp"
-        android:layout_height="729dp"
+        android:id="@+id/cardView"
+        android:layout_width="410dp"
+        android:layout_height="730dp"
         android:layout_gravity="center"
         android:elevation="0dp"
-        app:cardCornerRadius="250dp"
+        app:cardCornerRadius="245dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -22,9 +22,9 @@
         app:layout_constraintVertical_bias="0.5">
 
         <ImageView
-            android:id="@+id/cataddimageid"
-            android:layout_width="250dp"
-            android:layout_height="250dp"
+            android:id="@+id/catimgid"
+            android:layout_width="245dp"
+            android:layout_height="245dp"
             android:layout_gravity="center"
             android:background="@drawable/motherbaby"
             android:scaleType="fitXY" />

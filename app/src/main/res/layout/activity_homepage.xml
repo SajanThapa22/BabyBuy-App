@@ -5,11 +5,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.babybuy.Activity.MainAct"
+    tools:context="com.example.babybuy.Activity.MainActivity"
     android:id="@+id/homes"
     tools:openDrawer="start">
 
-   <include layout="@layout/layout_toolbar"/>
+   <include layout="@layout/nav_top"/>
 
  <com.google.android.material.navigation.NavigationView
       android:layout_width="wrap_content"
@@ -18,7 +18,7 @@
       android:layout_gravity="start"
       android:fitsSystemWindows="true"
       android:id="@+id/nav_view"
-      app:headerLayout="@layout/layout_header"
+      app:headerLayout="@layout/logo_header"
       app:menu="@menu/menu"
       />
 

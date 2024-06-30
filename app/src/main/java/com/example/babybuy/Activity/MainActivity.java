@@ -27,10 +27,9 @@ import android.view.Window;
 import android.widget.Toast;
 
 import com.example.babybuy.Database.Database;
-import com.example.babybuy.Fragments.SizechartFragment;
 import com.example.babybuy.Fragments.UserFragment;
 import com.example.babybuy.Fragments.HomeFragment;
-import com.example.babybuy.Fragments.ManProdFragment;
+import com.example.babybuy.Fragments.ManItemFragment;
 import com.example.babybuy.R;
 import com.google.android.material.navigation.NavigationView;
 
@@ -40,7 +39,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-public class MainAct extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     Toolbar toolbar;
@@ -113,19 +112,19 @@ public class MainAct extends AppCompatActivity {
                         break;
                     }
                     case R.id.mproduct: {
-                        loadFragment(new ManProdFragment());
+                        loadFragment(new ManItemFragment());
                         break;
                     }
 
                     case R.id.msendsms: {
-                        startActivity(new Intent(MainAct.this, SmsAct.class));
+                        startActivity(new Intent(MainActivity.this, MessageActivity.class));
                         break;
                     }
 
-                    case R.id.msizechart: {
-                        loadFragment(new SizechartFragment());
-                        break;
-                    }
+//                    case R.id.msizechart: {
+//                        loadFragment(new chartFragment());
+//                        break;
+//                    }
 
                     case R.id.mmuser: {
                         loadFragment(new UserFragment());
@@ -135,8 +134,8 @@ public class MainAct extends AppCompatActivity {
                     case R.id.mlogout: {
                         SharedPreferences sp=getSharedPreferences("Login", MODE_PRIVATE);
                         sp.edit().clear().apply();
-                        startActivity(new Intent(MainAct.this, LoginAct.class));
-                        Toast.makeText(MainAct.this, "Successfully Logout", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                        Toast.makeText(MainActivity.this, "Successfully Logout", Toast.LENGTH_SHORT).show();
                         break;
                     }
                 }

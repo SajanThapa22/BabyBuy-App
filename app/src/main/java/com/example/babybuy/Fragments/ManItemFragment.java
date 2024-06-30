@@ -16,10 +16,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.example.babybuy.Adapter.ManProdAdapter;
-import com.example.babybuy.Adapter.ProdListAdapter;
+import com.example.babybuy.Adapter.ManProductAdapter;
+import com.example.babybuy.Adapter.ItemListAdapter;
 import com.example.babybuy.Database.Database;
-import com.example.babybuy.Model.ProductDataModel;
+import com.example.babybuy.Model.ItemDataModel;
 import com.example.babybuy.R;
 
 import java.util.ArrayList;
@@ -28,25 +28,25 @@ import java.util.Objects;
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
 
 
-public class ManProdFragment extends Fragment {
+public class ManItemFragment extends Fragment {
 
-    public ManProdFragment() {
+    public ManItemFragment() {
         // Required empty public constructor
     }
 
     int productsts;
     Database db;
-    ArrayList<ProductDataModel> alldatapurchased;
-    ArrayList<ProductDataModel> alldata;
+    ArrayList<ItemDataModel> alldatapurchased;
+    ArrayList<ItemDataModel> alldata;
     RecyclerView product_recy;
-    ManProdAdapter adapter;
-    ManProdAdapter aadapter;
+    ManProductAdapter adapter;
+    ManProductAdapter aadapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_product, container, false);
+        View view = inflater.inflate(R.layout.items_list, container, false);
         Button purchasedbtn = view.findViewById(R.id.purchasedprodfrag);
         Button tobuybtn = view.findViewById(R.id.tobuyprod);
         db = new Database(getActivity());
@@ -55,13 +55,13 @@ public class ManProdFragment extends Fragment {
 
         // Load purchased product when purchased button is clicked
         alldata = db.productfetchdataforpurchased(1);
-        aadapter = new ManProdAdapter(getActivity(), alldata);
+        aadapter = new ManProductAdapter(getActivity(), alldata);
         product_recy.setAdapter(aadapter);
         new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(product_recy);
 
         purchasedbtn.setOnClickListener(v -> {
             alldata = db.productfetchdataforpurchased(1);
-            aadapter = new ManProdAdapter(getActivity(), alldata);
+            aadapter = new ManProductAdapter(getActivity(), alldata);
             product_recy.setAdapter(aadapter);
             new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(product_recy);
         });
@@ -70,7 +70,7 @@ public class ManProdFragment extends Fragment {
         //Load tobuy product when tobuy is clicked
         tobuybtn.setOnClickListener(v -> {
             alldata = db.productfetchdataforpurchased(-1);
-            adapter = new ManProdAdapter(getActivity(), alldata);
+            adapter = new ManProductAdapter(getActivity(), alldata);
             product_recy.setAdapter(adapter);
             new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(product_recy);
         });
@@ -89,7 +89,7 @@ public class ManProdFragment extends Fragment {
         public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
             int position = viewHolder.getAdapterPosition();
             Database db = new Database(getActivity());
-            ArrayList<ProductDataModel> alldataswipe = db.productfetchdataformap();
+            ArrayList<ItemDataModel> alldataswipe = db.productfetchdataformap();
             int productIdswipe = alldataswipe.get(position).getProductid();
             int productstsswipe = alldataswipe.get(position).getProductstatus();
 
@@ -98,8 +98,8 @@ public class ManProdFragment extends Fragment {
                     db.deleteproduct(productIdswipe);
                     alldataswipe.remove(position);
                     product_recy.getAdapter().notifyItemRemoved(position);
-                    ArrayList<ProductDataModel> rrecentdata = db.productfetchdataforpurchased(1);
-                    ProdListAdapter aadapter = new ProdListAdapter(getActivity(), rrecentdata);
+                    ArrayList<ItemDataModel> rrecentdata = db.productfetchdataforpurchased(1);
+                    ItemListAdapter aadapter = new ItemListAdapter(getActivity(), rrecentdata);
                     product_recy.setAdapter(aadapter);
                     Toast.makeText(getActivity(), "Successfully deleted", Toast.LENGTH_SHORT).show();
                     break;
@@ -108,7 +108,7 @@ public class ManProdFragment extends Fragment {
                     if (productstsswipe == -1) {
                         db.productpurchased(1, productIdswipe);
                         alldata = db.productfetchdataforpurchased(1);
-                        ManProdAdapter aadapter2 = new ManProdAdapter(getActivity(), alldata);
+                        ManProductAdapter aadapter2 = new ManProductAdapter(getActivity(), alldata);
                         product_recy.setAdapter(aadapter2);
                         //Toast.makeText(ProductListActivity.this, "Item Purchased", Toast.LENGTH_SHORT).show();
                         Objects.requireNonNull(product_recy.getAdapter()).notifyDataSetChanged();
@@ -119,7 +119,7 @@ public class ManProdFragment extends Fragment {
                     } else if (productstsswipe == 1) {
                         db.productpurchased(-1, productIdswipe);
                         alldata = db.productfetchdataforpurchased(-1);
-                        ManProdAdapter aadapter2 = new ManProdAdapter(getActivity(), alldata);
+                        ManProductAdapter aadapter2 = new ManProductAdapter(getActivity(), alldata);
                         product_recy.setAdapter(aadapter2);
                         // Toast.makeText(ProductListActivity.this, "Item unmarked", Toast.LENGTH_SHORT).show();
                         Objects.requireNonNull(product_recy.getAdapter()).notifyDataSetChanged();

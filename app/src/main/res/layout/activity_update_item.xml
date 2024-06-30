@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.AddProdAct">
+    tools:context=".Activity.ItemAddActivity">
 
     <LinearLayout
-        android:id="@+id/utoptoolbar"
+        android:id="@+id/uptoolbar"
         android:layout_width="match_parent"
         android:layout_height="53dp"
         android:background="#9ECF6E"
@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/ubackimgf"
+            android:id="@+id/upbgimg"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_gravity="left|center"
@@ -27,41 +27,42 @@
     </LinearLayout>
 
     <ImageView
-        android:id="@+id/productupdateimageid"
+        android:id="@+id/itemupdateimgid"
         android:layout_width="152dp"
         android:layout_height="145dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="30dp"
+        android:background="@drawable/upload_a_photo"
         android:scaleType="fitXY"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/utoptoolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/uptoolbar" />
 
     <LinearLayout
-        android:id="@+id/productlinear"
+        android:id="@+id/layoutprodlinear"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="@+id/productupdateimageid"
+        app:layout_constraintEnd_toEndOf="@+id/itemupdateimgid"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/productupdateimageid">
+        app:layout_constraintTop_toBottomOf="@+id/itemupdateimgid">
 
         <TextView
             android:id="@+id/productupdatefromgallery"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="#2196F3"
+            android:background="@color/bg_gray"
             android:padding="5dp"
             android:textColor="#000"
             android:layout_marginBottom="5dp"
             android:layout_marginStart="5dp"
-            android:text="Upload Photo from Gallery" />
+            android:text="from Gallery" />
 
         <TextView
             android:id="@+id/productupdatefromcamera"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="#00BCD4"
+            android:background="@color/bg_gray"
             android:textColor="#000"
             android:padding="5dp"
             android:layout_marginStart="5dp"
@@ -78,15 +79,15 @@
         android:layout_marginEnd="20dp"
         android:layout_marginStart="15dp"
         android:ems="10"
-        android:background="#8B2196F3"
+        android:background="@color/bg_gray"
         android:padding="5dp"
         android:hint="Name"
-        android:textColorHint="#fff"
+        android:textColorHint="#000"
         android:inputType="textPersonName"
         android:minHeight="48dp"
-        app:layout_constraintStart_toEndOf="@+id/productupdateimageid"
+        app:layout_constraintStart_toEndOf="@+id/itemupdateimgid"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/utoptoolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/uptoolbar" />
 
     <EditText
         android:id="@+id/productuodatedesid"
@@ -94,10 +95,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
-        android:background="#8B2196F3"
+        android:background="@color/bg_gray"
         android:padding="5dp"
         android:hint="Description"
-        android:textColorHint="#fff"
+        android:textColorHint="#000"
         android:inputType="textPersonName"
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -110,10 +111,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
-        android:background="#8B2196F3"
-        android:padding="5dp"
+        android:background="@color/bg_gray"        android:padding="5dp"
         android:hint="Price"
-        android:textColorHint="#fff"
+        android:textColorHint="#000"
         android:inputType="number"
         android:minHeight="48dp"
         app:layout_constraintStart_toStartOf="@+id/productupdatetitleid"
@@ -126,10 +126,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
-        android:background="#8B2196F3"
+        android:background="@color/bg_gray"
         android:padding="5dp"
         android:hint="Quantity"
-        android:textColorHint="#fff"
+        android:textColorHint="#000"
         android:inputType="number"
         android:minHeight="48dp"
         app:layout_constraintStart_toStartOf="@+id/productupdatetitleid"
@@ -139,8 +139,9 @@
 
     <fragment
         android:layout_width="match_parent"
+        android:visibility="invisible"
         android:layout_height="400dp"
-        android:id="@+id/google_map"
+        android:id="@+id/location_map"
         android:layout_marginTop="10dp"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         app:layout_constraintBottom_toTopOf="@+id/productupdatebtnid"
@@ -154,6 +155,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Update Product"
+        android:backgroundTint="@color/greencolor"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -163,6 +165,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Cancel"
+        android:backgroundTint="@color/greencolor"
         android:layout_marginStart="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/productupdatebtnid" />

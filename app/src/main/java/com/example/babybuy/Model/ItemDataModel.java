@@ -1,9 +1,6 @@
 package com.example.babybuy.Model;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-
-public class ProductDataModel {
+public class ItemDataModel {
 
 
     Integer productid;

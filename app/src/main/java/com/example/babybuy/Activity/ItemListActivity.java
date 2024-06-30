@@ -19,9 +19,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-import com.example.babybuy.Adapter.ProdListAdapter;
+import com.example.babybuy.Adapter.ItemListAdapter;
 import com.example.babybuy.Database.Database;
-import com.example.babybuy.Model.ProductDataModel;
+import com.example.babybuy.Model.ItemDataModel;
 import com.example.babybuy.R;
 
 import java.util.ArrayList;
@@ -29,73 +29,69 @@ import java.util.Objects;
 
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
 
-public class ProdListAct extends AppCompatActivity {
-    ImageButton backtocategoryy;
+public class ItemListActivity extends AppCompatActivity {
+    ImageButton returntocat;
     Button addnewproduct;
     Integer procatid;
     SearchView searchView;
     TextView productname, totalpurchasedprice, totaltobuyprice;
-    ArrayList<ProductDataModel> alldata;
-    RecyclerView product_recy;
-    ProductDataModel productDataModel;
-    ProdListAdapter adapter;
+    ArrayList<ItemDataModel> alldata;
+    RecyclerView productrecycle;
+    ItemDataModel productDataModel;
+    ItemListAdapter adapter;
     Database db = new Database(this);
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_product);
-        backtocategoryy = findViewById(R.id.backtocategory);
-        addnewproduct = findViewById(R.id.productactivityaddbtn);
-        productname = findViewById(R.id.productshowname);
-        totalpurchasedprice = findViewById(R.id.totalpurchasedprice);
-        totaltobuyprice = findViewById(R.id.totaltobuyprice);
+        setContentView(R.layout.activity_item);
+        returntocat = findViewById(R.id.backtocat);
+        addnewproduct = findViewById(R.id.itemactivityaddbtn);
+        productname = findViewById(R.id.itemname);
+        totalpurchasedprice = findViewById(R.id.totalprice);
+        totaltobuyprice = findViewById(R.id.tobuytotalprice);
 
 
-
-
-        //change notification color
+        //to change notification color
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = this.getWindow();
             window.setStatusBarColor(this.getResources().getColor(R.color.greencolor));
         }
 
-        //strikethrough text (no need)
-        // catname.setPaintFlags(catname.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 
         //getting value from Category Adapter using Intent
         procatid = getIntent().getExtras().getInt("pcid");
 
 
-        productDataModel = new ProductDataModel();
+        productDataModel = new ItemDataModel();
 
         alldata = db.productfetchdata(procatid);
 
 
         //ojbect created using recyclerview and connected to id
-        product_recy = findViewById(R.id.product_recy_view);
+        productrecycle = findViewById(R.id.product_recy_view);
         //Layoutmanager setup
-        product_recy.setLayoutManager(new LinearLayoutManager(this));
+        productrecycle.setLayoutManager(new LinearLayoutManager(this));
         //swipe function
-        new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(product_recy);
+        new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(productrecycle);
         //adding data fetched to the adapter
-        adapter = new ProdListAdapter(this, alldata);
+        adapter = new ItemListAdapter(this, alldata);
 
         //add adapter to view
-        product_recy.setAdapter(adapter);
+        productrecycle.setAdapter(adapter);
 
         // Back to Category Fragment
 
 
         //Add new product (redirecting to Addnewproduct activity)
         addnewproduct.setOnClickListener(v -> {
-            Intent intent = new Intent(ProdListAct.this, AddProdAct.class);
+            Intent intent = new Intent(ItemListActivity.this, ItemAddActivity.class);
             intent.putExtra("pcid", procatid);
             startActivity(intent);
         });
 
-        backtocategoryy.setOnClickListener(v -> {
+        returntocat.setOnClickListener(v -> {
             redirecttocategory();
         });
 
@@ -115,8 +111,8 @@ public class ProdListAct extends AppCompatActivity {
         @Override
         public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
             int position = viewHolder.getAdapterPosition();
-            Database db = new Database(ProdListAct.this);
-            ArrayList<ProductDataModel> alldataswipe = db.productfetchdata(procatid);
+            Database db = new Database(ItemListActivity.this);
+            ArrayList<ItemDataModel> alldataswipe = db.productfetchdata(procatid);
             int productIdswipe = alldataswipe.get(position).getProductid();
             int productstsswipe = alldataswipe.get(position).getProductstatus();
 
@@ -126,28 +122,28 @@ public class ProdListAct extends AppCompatActivity {
                     //To Delete Product
                     db.deleteproduct(productIdswipe);
                     alldata.remove(position);
-                    product_recy.getAdapter().notifyItemRemoved(position);
-                    ArrayList<ProductDataModel> rrecentdata = db.productfetchdata(procatid);
-                    ProdListAdapter aadapter = new ProdListAdapter(ProdListAct.this, rrecentdata);
-                    product_recy.setAdapter(aadapter);
+                    productrecycle.getAdapter().notifyItemRemoved(position);
+                    ArrayList<ItemDataModel> rrecentdata = db.productfetchdata(procatid);
+                    ItemListAdapter aadapter = new ItemListAdapter(ItemListActivity.this, rrecentdata);
+                    productrecycle.setAdapter(aadapter);
                     priceresult();
                     break;
 
                 case ItemTouchHelper.RIGHT:
                     if (productstsswipe == -1) {
                         db.productpurchased(1, productIdswipe);
-                        ArrayList<ProductDataModel> recentdata = db.productfetchdata(procatid);
+                        ArrayList<ItemDataModel> recentdata = db.productfetchdata(procatid);
                         //Toast.makeText(ProductListActivity.this, "Item Purchased", Toast.LENGTH_SHORT).show();
-                        Objects.requireNonNull(product_recy.getAdapter()).notifyDataSetChanged();
+                        Objects.requireNonNull(productrecycle.getAdapter()).notifyDataSetChanged();
 
                         alldata.get(position).setProductstatus(1);
                         priceresult();
 
                     } else if (productstsswipe == 1) {
                         db.productpurchased(-1, productIdswipe);
-                        ArrayList<ProductDataModel> recentdata = db.productfetchdata(procatid);
+                        ArrayList<ItemDataModel> recentdata = db.productfetchdata(procatid);
                        // Toast.makeText(ProductListActivity.this, "Item unmarked", Toast.LENGTH_SHORT).show();
-                        Objects.requireNonNull(product_recy.getAdapter()).notifyDataSetChanged();
+                        Objects.requireNonNull(productrecycle.getAdapter()).notifyDataSetChanged();
 
                         alldata.get(position).setProductstatus(-1);
                         priceresult();
@@ -166,7 +162,7 @@ public class ProdListAct extends AppCompatActivity {
                     .addSwipeLeftActionIcon(R.drawable.ic_delete)
                     .setSwipeLeftActionIconTint(getResources().getColor(R.color.white))
                     .addSwipeLeftBackgroundColor(getResources().getColor(R.color.colorRed))
-                    .addSwipeRightLabel("purchased or tobuy")
+                    .addSwipeRightLabel("purchased")
                     .setSwipeRightLabelColor(getResources().getColor(R.color.white))
                     .addSwipeRightActionIcon(R.drawable.ic_purchase)
                     .setSwipeRightActionIconTint(getResources().getColor(R.color.white))
@@ -181,8 +177,8 @@ public class ProdListAct extends AppCompatActivity {
     //calculate price
     public void priceresult() {
         try {
-            totalpurchasedprice = findViewById(R.id.totalpurchasedprice);
-            totaltobuyprice = findViewById(R.id.totaltobuyprice);
+            totalpurchasedprice = findViewById(R.id.totalprice);
+            totaltobuyprice = findViewById(R.id.tobuytotalprice);
             alldata = db.productfetchdata(procatid);
             Double totalPurchasedPrice = 0.0;
             Double totaltoBuyPrice = 0.0;
@@ -201,19 +197,19 @@ public class ProdListAct extends AppCompatActivity {
     }
 
     public void redirecttocategory() {
-        startActivity(new Intent(ProdListAct.this, MainAct.class));
+        startActivity(new Intent(ItemListActivity.this, MainActivity.class));
     }
 
     public void recyclerupdate(){
-        adapter = new ProdListAdapter(this, alldata);
+        adapter = new ItemListAdapter(this, alldata);
 
         //add adapter to view
-        product_recy.setAdapter(adapter);
+        productrecycle.setAdapter(adapter);
     }
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(ProdListAct.this, MainAct.class);
+        Intent intent = new Intent(ItemListActivity.this, MainActivity.class);
         startActivity(intent);
     }
 }

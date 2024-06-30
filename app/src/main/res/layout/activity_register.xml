@@ -6,10 +6,10 @@
     android:layout_height="match_parent"
     android:background="#68958D8D"
     android:id="@+id/constraintLayout"
-    tools:context="com.example.babybuy.Activity.RegisterAct">
+    tools:context="com.example.babybuy.Activity.RegisterActivity">
 
     <TextView
-        android:id="@+id/logo"
+        android:id="@+id/babybuylogo"
         android:layout_width="190dp"
         android:layout_height="81dp"
         android:fontFamily="sans-serif-medium"
@@ -24,7 +24,7 @@
         app:layout_constraintVertical_bias="0.13" />
 
     <EditText
-        android:id="@+id/smobile"
+        android:id="@+id/phn_no"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -45,10 +45,10 @@
         android:textColorHint="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logo" />
+        app:layout_constraintTop_toBottomOf="@+id/babybuylogo" />
 
     <EditText
-        android:id="@+id/stitle"
+        android:id="@+id/item_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -64,12 +64,12 @@
         android:paddingBottom="10dp"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
-        app:layout_constraintEnd_toEndOf="@id/smobile"
-        app:layout_constraintStart_toStartOf="@+id/smobile"
-        app:layout_constraintTop_toBottomOf="@+id/smobile" />
+        app:layout_constraintEnd_toEndOf="@id/phn_no"
+        app:layout_constraintStart_toStartOf="@+id/phn_no"
+        app:layout_constraintTop_toBottomOf="@+id/phn_no" />
 
     <EditText
-        android:id="@+id/sdescription"
+        android:id="@+id/item_des"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -85,13 +85,13 @@
         android:paddingBottom="10dp"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
-        app:layout_constraintEnd_toEndOf="@+id/stitle"
-        app:layout_constraintStart_toStartOf="@+id/stitle"
-        app:layout_constraintTop_toBottomOf="@+id/stitle" />
+        app:layout_constraintEnd_toEndOf="@+id/item_title"
+        app:layout_constraintStart_toStartOf="@+id/item_title"
+        app:layout_constraintTop_toBottomOf="@+id/item_title" />
 
 
     <EditText
-        android:id="@+id/squnatity"
+        android:id="@+id/item_quan"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -108,13 +108,13 @@
         android:paddingBottom="10dp"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
-        app:layout_constraintEnd_toEndOf="@+id/sdescription"
+        app:layout_constraintEnd_toEndOf="@+id/item_des"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/sdescription"
-        app:layout_constraintTop_toBottomOf="@+id/sdescription" />
+        app:layout_constraintStart_toStartOf="@+id/item_des"
+        app:layout_constraintTop_toBottomOf="@+id/item_des" />
 
     <EditText
-        android:id="@+id/sprice"
+        android:id="@+id/item_price"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -132,14 +132,14 @@
         android:paddingBottom="10dp"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
-        app:layout_constraintEnd_toEndOf="@+id/squnatity"
+        app:layout_constraintEnd_toEndOf="@+id/item_quan"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/squnatity"
-        app:layout_constraintTop_toBottomOf="@+id/squnatity" />
+        app:layout_constraintStart_toStartOf="@+id/item_quan"
+        app:layout_constraintTop_toBottomOf="@+id/item_quan" />
 
 
     <Button
-        android:id="@+id/btnsendsms"
+        android:id="@+id/btn_sms"
 
         android:layout_width="288dp"
         android:layout_height="71dp"
@@ -148,10 +148,10 @@
         android:fontFamily="sans-serif-medium"
         android:text="Register"
         android:textSize="20dp"
-        app:layout_constraintEnd_toEndOf="@+id/sprice"
+        app:layout_constraintEnd_toEndOf="@+id/item_price"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/sprice"
-        app:layout_constraintTop_toBottomOf="@+id/sprice" />
+        app:layout_constraintStart_toStartOf="@+id/item_price"
+        app:layout_constraintTop_toBottomOf="@+id/item_price" />
 
     <TextView
         android:id="@+id/ahaa"
@@ -160,10 +160,10 @@
         android:layout_marginTop="16dp"
         android:fontFamily="sans-serif-medium"
         android:text="Already have an account, "
-        app:layout_constraintEnd_toEndOf="@+id/btnsendsms"
+        app:layout_constraintEnd_toEndOf="@+id/btn_sms"
         app:layout_constraintHorizontal_bias="0.02"
-        app:layout_constraintStart_toStartOf="@+id/btnsendsms"
-        app:layout_constraintTop_toBottomOf="@+id/btnsendsms" />
+        app:layout_constraintStart_toStartOf="@+id/btn_sms"
+        app:layout_constraintTop_toBottomOf="@+id/btn_sms" />
 
     <TextView
         android:id="@+id/rsingup"
@@ -178,5 +178,5 @@
         android:textColor="#3F51B5"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/ahaa"
-        app:layout_constraintTop_toBottomOf="@+id/btnsendsms" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_sms" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.ProdListAct">
+    tools:context=".Activity.ItemListActivity">
 
 
     <LinearLayout
@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageButton
-            android:id="@+id/backtocategory"
+            android:id="@+id/backtocat"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_gravity="left|center"
@@ -30,11 +30,11 @@
 
 
     <TextView
-        android:id="@+id/productshowname"
+        android:id="@+id/itemname"
         android:layout_width="118dp"
         android:layout_height="56dp"
         android:fontFamily="sans-serif"
-        android:text="Product List"
+        android:text="Item List"
         android:textColor="#000000"
         android:textSize="20sp"
         android:textStyle="normal|bold"
@@ -46,11 +46,11 @@
 
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/productprice"
+        android:id="@+id/itemprice"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/followersBg"
-        app:layout_constraintBottom_toTopOf="@+id/productaddbtntool"
+        app:layout_constraintBottom_toTopOf="@+id/btnadditem"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
@@ -62,7 +62,7 @@
             android:text="Purchased" />
 
         <TextView
-            android:id="@+id/totalpurchasedprice"
+            android:id="@+id/totalprice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
@@ -70,7 +70,7 @@
 
 
         <TextView
-            android:id="@+id/totaltobuyprice"
+            android:id="@+id/tobuytotalprice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
@@ -89,7 +89,7 @@
 
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/productaddbtntool"
+        android:id="@+id/btnadditem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#4CAF50"
@@ -101,7 +101,7 @@
         app:layout_constraintVertical_bias="1.0">
 
         <Button
-            android:id="@+id/productactivityaddbtn"
+            android:id="@+id/itemactivityaddbtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -123,7 +123,7 @@
         android:layout_height="match_parent"
         android:layout_marginTop="100dp"
         android:layout_marginBottom="115dp"
-        app:layout_constraintBottom_toTopOf="@+id/productprice"
+        app:layout_constraintBottom_toTopOf="@+id/itemprice"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

@@ -14,24 +14,27 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.babybuy.Activity.MapAct;
-import com.example.babybuy.Activity.UpdateProdAct;
-import com.example.babybuy.Activity.SmsAct;
-import com.example.babybuy.Model.ProductDataModel;
+import com.example.babybuy.Activity.GoogleMapAct;
+import com.example.babybuy.Activity.UpdateItemAct;
+import com.example.babybuy.Database.Database;
+import com.example.babybuy.Activity.MessageActivity;
+import com.example.babybuy.Model.ItemDataModel;
 import com.example.babybuy.R;
 
 import java.util.ArrayList;
 
-public class ProdListAdapter extends RecyclerView.Adapter<ProdListAdapter.ViewHolder> {
+public class ManProductAdapter extends RecyclerView.Adapter<ManProductAdapter.ViewHolder> {
 
     Context context;
-    ArrayList<ProductDataModel> arrayList;
-    ProductDataModel pdm;
+    ArrayList<ItemDataModel> arrayList;
+    ItemDataModel pdm;
 
 
-    public ProdListAdapter(Context context, ArrayList<ProductDataModel> arrayList) {
+    public ManProductAdapter(Context context, ArrayList<ItemDataModel> arrayList) {
         this.context = context;
         this.arrayList = arrayList;
+
+
     }
 
 
@@ -39,7 +42,7 @@ public class ProdListAdapter extends RecyclerView.Adapter<ProdListAdapter.ViewHo
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView producttitle, productdes, productprice, productquantity;
         TextView productstatusbox;
-        ImageView pedit, pdelete, productimage, pmap, psms;
+        ImageView pedit, productimage, pmap, psms;
         CardView productcardview;
 
         public ViewHolder(@NonNull View itemView) {
@@ -55,21 +58,22 @@ public class ProdListAdapter extends RecyclerView.Adapter<ProdListAdapter.ViewHo
             pmap = itemView.findViewById(R.id.productlistmap);
             psms = itemView.findViewById(R.id.productlistsms);
 
+
         }
     }
 
     @NonNull
     @Override
-    public ProdListAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(context).inflate(R.layout.design_product_recyclerview, parent, false);
-        ProdListAdapter.ViewHolder viewHolder = new ProdListAdapter.ViewHolder(v);
+    public ManProductAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View v = LayoutInflater.from(context).inflate(R.layout.item_card, parent, false);
+        ManProductAdapter.ViewHolder viewHolder = new ManProductAdapter.ViewHolder(v);
         return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        pdm = arrayList.get(position);
-
+        Database db = new Database(context);
+        ItemDataModel pdm = arrayList.get(position);
 
         holder.producttitle.setText(pdm.getProductname());
         holder.productdes.setText(pdm.getProductdescription());
@@ -85,24 +89,23 @@ public class ProdListAdapter extends RecyclerView.Adapter<ProdListAdapter.ViewHo
         }
 
         holder.pmap.setOnClickListener(view -> {
-            Intent imap = new Intent(context, MapAct.class);
+            Intent imap = new Intent(context, GoogleMapAct.class);
             imap.putExtra("productid", pdm.getProductid());
-            imap.putExtra("productname", pdm.getProductname());
             context.startActivity(imap);
         });
 
         holder.psms.setOnClickListener(view -> {
-            Intent imap = new Intent(context, SmsAct.class);
+            Intent imap = new Intent(context, MessageActivity.class);
             imap.putExtra("productid", pdm.getProductid());
             context.startActivity(imap);
         });
 
 
+
         holder.pedit.setOnClickListener(view -> {
-            Intent iedit = new Intent(context, UpdateProdAct.class);
-            iedit.putExtra("productid", pdm.getProductid());
-            iedit.putExtra("pcid", pdm.getProductcategoryid());
-            context.startActivity(iedit);
+            Intent imap = new Intent(context, UpdateItemAct.class);
+            imap.putExtra("productid", pdm.getProductcategoryid());
+            context.startActivity(imap);
         });
     }
 
@@ -110,6 +113,5 @@ public class ProdListAdapter extends RecyclerView.Adapter<ProdListAdapter.ViewHo
     public int getItemCount() {
         return arrayList.size();
     }
-
 
 }

@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.AddProdAct">
+    tools:context=".Activity.ItemAddActivity">
 
     <LinearLayout
-        android:id="@+id/toptoolbar"
+        android:id="@+id/topbar"
         android:layout_width="match_parent"
         android:layout_height="53dp"
         android:background="#62C347"
@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/backimgf"
+            android:id="@+id/bgimg"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_gravity="left|center"
@@ -27,117 +27,117 @@
     </LinearLayout>
 
     <ImageView
-        android:id="@+id/productaddimageid"
+        android:id="@+id/prodimgid"
         android:layout_width="152dp"
         android:layout_height="145dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="50dp"
         android:scaleType="fitXY"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toptoolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/topbar" />
 
     <LinearLayout
-        android:id="@+id/productlinear"
+        android:id="@+id/layoutprodlinear"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:gravity="center"
         android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="@+id/productaddimageid"
+        app:layout_constraintEnd_toEndOf="@+id/prodimgid"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/productaddimageid">
+        app:layout_constraintTop_toBottomOf="@+id/prodimgid">
 
         <TextView
-            android:id="@+id/productaddfromgallery"
+            android:id="@+id/imgfromgallery"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:layout_marginBottom="5dp"
             android:padding="5dp"
-            android:text="from Gallery" />
+            android:text="@string/from_gallery" />
 
         <TextView
-            android:id="@+id/productaddfromcamera"
+            android:id="@+id/imgfromcam"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:padding="5dp"
-            android:text="from Camera" />
+            android:text="@string/from_camera" />
 
     </LinearLayout>
 
 
     <EditText
-        android:id="@+id/productaddtitleid"
+        android:id="@+id/prodtitle"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginStart="192dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
-        android:hint="Name"
+        android:hint="@string/name"
         android:inputType="textPersonName"
         android:minHeight="48dp"
         android:padding="5dp"
-        app:layout_constraintStart_toEndOf="@+id/productaddimageid"
-        app:layout_constraintTop_toBottomOf="@+id/toptoolbar" />
+        app:layout_constraintStart_toEndOf="@+id/prodimgid"
+        app:layout_constraintTop_toBottomOf="@+id/topbar" />
 
     <EditText
-        android:id="@+id/productadddesid"
+        android:id="@+id/prodaddrid"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:hint="Description"
+        android:hint="@string/description"
         android:inputType="textPersonName"
         android:minHeight="48dp"
         android:padding="5dp"
-        app:layout_constraintEnd_toEndOf="@+id/productaddtitleid"
-        app:layout_constraintStart_toStartOf="@+id/productaddtitleid"
-        app:layout_constraintTop_toBottomOf="@+id/productaddtitleid" />
+        app:layout_constraintEnd_toEndOf="@+id/prodtitle"
+        app:layout_constraintStart_toStartOf="@+id/prodtitle"
+        app:layout_constraintTop_toBottomOf="@+id/prodtitle" />
 
     <EditText
-        android:id="@+id/productaddpriceid"
+        android:id="@+id/addpriceid"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:ems="10"
-        android:hint="Price"
+        android:hint="@string/price"
         android:inputType="number"
         android:minHeight="48dp"
         android:padding="5dp"
-        app:layout_constraintEnd_toEndOf="@+id/productaddtitleid"
-        app:layout_constraintStart_toStartOf="@+id/productaddtitleid"
-        app:layout_constraintTop_toBottomOf="@+id/productadddesid" />
+        app:layout_constraintEnd_toEndOf="@+id/prodtitle"
+        app:layout_constraintStart_toStartOf="@+id/prodtitle"
+        app:layout_constraintTop_toBottomOf="@+id/prodaddrid" />
 
     <EditText
-        android:id="@+id/productaddquantityid"
+        android:id="@+id/prodquanid"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:hint="Quantity"
+        android:hint="@string/quantity"
         android:inputType="number"
         android:minHeight="48dp"
         android:padding="5dp"
-        app:layout_constraintEnd_toEndOf="@+id/productaddtitleid"
-        app:layout_constraintStart_toStartOf="@+id/productaddtitleid"
-        app:layout_constraintTop_toBottomOf="@+id/productaddpriceid" />
+        app:layout_constraintEnd_toEndOf="@+id/prodtitle"
+        app:layout_constraintStart_toStartOf="@+id/prodtitle"
+        app:layout_constraintTop_toBottomOf="@+id/addpriceid" />
 
 
-    <fragment
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:id="@+id/google_map"
-        android:name="com.google.android.gms.maps.SupportMapFragment"
-        app:layout_constraintBottom_toTopOf="@+id/productaddbtnid"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/productaddquantityid"/>
+<!--    <fragment-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="200dp"-->
+<!--        android:id="@+id/google_map"-->
+<!--        android:name="com.google.android.gms.maps.SupportMapFragment"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/productaddbtnid"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/productaddquantityid"/>-->
 
 
     <Button
-        android:id="@+id/productaddbtnid"
+        android:id="@+id/addprodbtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add Product"
+        android:text="@string/add_product"
         android:textColor="#fff"
         android:layout_marginBottom="10dp"
         android:backgroundTint="@color/greencolor"

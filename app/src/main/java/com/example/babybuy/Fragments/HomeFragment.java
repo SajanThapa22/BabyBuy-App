@@ -26,7 +26,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.babybuy.Adapter.CatoAdapter;
+import com.example.babybuy.Adapter.CategoryAdapter;
 import com.example.babybuy.Database.Database;
 import com.example.babybuy.Model.CatDataModel;
 import com.example.babybuy.R;
@@ -43,7 +43,7 @@ public class HomeFragment extends Fragment {
 
     //Variable for Recyclerview and Adapter
     RecyclerView recycler_category;
-    CatoAdapter catadapter;
+    CategoryAdapter catadapter;
     ArrayList<CatDataModel> allcatdata;
     final int CAMERA_CODE = 100;
     final int GALLERY_CODE = 200;
@@ -56,7 +56,7 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_category, container, false);
+        View view = inflater.inflate(R.layout.category_list, container, false);
 
         //Insert category button
         addnewcat = view.findViewById(R.id.cataddbtn);
@@ -80,7 +80,7 @@ public class HomeFragment extends Fragment {
         recycler_category.setLayoutManager(grid);
 
         //CategoryListAdapter object
-        catadapter = new CatoAdapter(getContext(), catdata());
+        catadapter = new CategoryAdapter(getContext(), catdata());
         //set Recyclerview to Adapter
         recycler_category.setAdapter(catadapter);
 
@@ -98,10 +98,10 @@ public class HomeFragment extends Fragment {
     private void addnewcategorydailoge() {
         AlertDialog.Builder addcat = new AlertDialog.Builder(getActivity(), R.style.YourThemeName);
 
-        View viewalert = LayoutInflater.from(getActivity()).inflate(R.layout.alertdialoge_category, null);
+        View viewalert = LayoutInflater.from(getActivity()).inflate(R.layout.add_category, null);
         cataddgallery = viewalert.findViewById(R.id.cataddfromgallery);
         cataddcamera = viewalert.findViewById(R.id.cataddfromcamera);
-        cataddimage = viewalert.findViewById(R.id.cataddimageid);
+        cataddimage = viewalert.findViewById(R.id.catimgid);
         addcat.setCancelable(true);
         addcat.setView(viewalert);
         EditText newcategoryname = viewalert.findViewById(R.id.edittextcatname);
@@ -130,7 +130,7 @@ public class HomeFragment extends Fragment {
                 } else {
                     Toast.makeText(getActivity(), "Successfully Updated", Toast.LENGTH_SHORT).show();
                     // Collections.reverse(allcatdata);
-                    CatoAdapter adapter = new CatoAdapter(getContext(), catdata());
+                    CategoryAdapter adapter = new CategoryAdapter(getContext(), catdata());
                     recycler_category.setAdapter(adapter);
                 }
             }

@@ -3,18 +3,13 @@ package com.example.babybuy.Database;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import androidx.fragment.app.Fragment;
-
-import com.example.babybuy.Model.AuthDatamodel;
 import com.example.babybuy.Model.CatDataModel;
-import com.example.babybuy.Model.ProductDataModel;
+import com.example.babybuy.Model.ItemDataModel;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Database extends SQLiteOpenHelper {
 
@@ -224,7 +219,7 @@ public class Database extends SQLiteOpenHelper {
 
 
     //insert method for product
-    public long productadd(ProductDataModel productDataModel) {
+    public long productadd(ItemDataModel productDataModel) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues v = new ContentValues();
         v.put(PRODUCT_COL_1, productDataModel.getProductname());
@@ -251,12 +246,12 @@ public class Database extends SQLiteOpenHelper {
 
 
     //select method for productlist
-    public ArrayList<ProductDataModel> productfetchdata(int catid) {
+    public ArrayList<ItemDataModel> productfetchdata(int catid) {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor getdata = db.rawQuery("select * from " + PRODUCT_TABLE + " where " + PRODUCT_COL_10 + " = ? ", new String[]{String.valueOf(catid)});
-        ArrayList<ProductDataModel> productarray = new ArrayList<>();
+        ArrayList<ItemDataModel> productarray = new ArrayList<>();
         while (getdata.moveToNext()) {
-            ProductDataModel prod = new ProductDataModel();
+            ItemDataModel prod = new ItemDataModel();
             prod.setProductid(getdata.getInt(0));
             prod.setProductname(getdata.getString(1));
             prod.setProductquantity(getdata.getInt(2));
@@ -269,12 +264,12 @@ public class Database extends SQLiteOpenHelper {
         return productarray;
     }
 
-    public ArrayList<ProductDataModel> productfetchdataformap() {
+    public ArrayList<ItemDataModel> productfetchdataformap() {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor getdata = db.rawQuery("select * from " + PRODUCT_TABLE , null);
-        ArrayList<ProductDataModel> productarray = new ArrayList<>();
+        ArrayList<ItemDataModel> productarray = new ArrayList<>();
         while (getdata.moveToNext()) {
-            ProductDataModel prod = new ProductDataModel();
+            ItemDataModel prod = new ItemDataModel();
             prod.setProductid(getdata.getInt(0));
             prod.setProductname(getdata.getString(1));
             prod.setProductquantity(getdata.getInt(2));
@@ -292,12 +287,12 @@ public class Database extends SQLiteOpenHelper {
     }
 
     //select method for productlist
-    public ArrayList<ProductDataModel> productfetchdataformapload(int id) {
+    public ArrayList<ItemDataModel> productfetchdataformapload(int id) {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor getdata = db.rawQuery("select * from " + PRODUCT_TABLE + " where " + PRODUCT_ID + " = ? ", new String[]{String.valueOf(id)});
-        ArrayList<ProductDataModel> productarray = new ArrayList<>();
+        ArrayList<ItemDataModel> productarray = new ArrayList<>();
         while (getdata.moveToNext()) {
-            ProductDataModel prod = new ProductDataModel();
+            ItemDataModel prod = new ItemDataModel();
             prod.setProductid(getdata.getInt(0));
             prod.setProductname(getdata.getString(1));
             prod.setProductquantity(getdata.getInt(2));
@@ -318,12 +313,12 @@ public class Database extends SQLiteOpenHelper {
 
 
     //purchased product list for manageproduct fragment
-    public ArrayList<ProductDataModel> productfetchdataforpurchased(int productsts) {
+    public ArrayList<ItemDataModel> productfetchdataforpurchased(int productsts) {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor getdata = db.rawQuery("select * from " + PRODUCT_TABLE + " where " + PRODUCT_COL_5 + " = ?", new String[]{String.valueOf(productsts)});
-        ArrayList<ProductDataModel> productarray = new ArrayList<>();
+        ArrayList<ItemDataModel> productarray = new ArrayList<>();
         while (getdata.moveToNext()) {
-            ProductDataModel prod = new ProductDataModel();
+            ItemDataModel prod = new ItemDataModel();
             prod.setProductid(getdata.getInt(0));
             prod.setProductname(getdata.getString(1));
             prod.setProductquantity(getdata.getInt(2));
@@ -337,7 +332,7 @@ public class Database extends SQLiteOpenHelper {
     }
 
     //update method for product
-    public int updateproduct(ProductDataModel productDataModel, int productid) {
+    public int updateproduct(ItemDataModel productDataModel, int productid) {
         SQLiteDatabase udb = getWritableDatabase();
         ContentValues v = new ContentValues();
         v.put(PRODUCT_COL_1, productDataModel.getProductname());
