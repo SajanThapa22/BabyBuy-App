@@ -134,7 +134,7 @@
                         android:layout_height="39dp"
                         android:layout_gravity="center"
                         android:layout_weight="1"
-                        android:background="@drawable/ic_email"
+                        android:background="@drawable/email_icon"
                         android:backgroundTint="@color/colorWhite" />
 
                 </TableRow>

@@ -152,7 +152,7 @@ public class ItemListActivity extends AppCompatActivity {
             new RecyclerViewSwipeDecorator.Builder(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
                     .addSwipeLeftLabel("Delete")
                     .setSwipeLeftLabelColor(getResources().getColor(R.color.white))
-                    .addSwipeLeftActionIcon(R.drawable.ic_delete)
+                    .addSwipeLeftActionIcon(R.drawable.delete_icon)
                     .setSwipeLeftActionIconTint(getResources().getColor(R.color.white))
                     .addSwipeLeftBackgroundColor(getResources().getColor(R.color.colorRed))
                     .addSwipeRightLabel("purchased")

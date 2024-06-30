@@ -22,7 +22,7 @@
             android:layout_height="40dp"
             android:layout_gravity="left|center"
             android:layout_marginStart="5dp"
-            android:background="@drawable/ic_arrow_back"
+            android:background="@drawable/return_icon"
             android:contentDescription="TODO" />
 
 
@@ -58,7 +58,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
-            android:drawableLeft="@drawable/ic_shoppinglist"
+            android:drawableLeft="@drawable/shopping_icon"
             android:text="Purchased" />
 
         <TextView
@@ -82,7 +82,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/black"
             android:layout_gravity="end"
-            android:drawableLeft="@drawable/ic_list"
+            android:drawableLeft="@drawable/list_icon"
             android:text="ToBuy" />
 
     </androidx.appcompat.widget.Toolbar>
@@ -106,7 +106,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:background="#00DF3076"
-            android:drawableLeft="@drawable/ic_add"
+            android:drawableLeft="@drawable/add_icon"
             android:text="Add New Product"
             android:textSize="20dp"
             android:textColor="#fff"
