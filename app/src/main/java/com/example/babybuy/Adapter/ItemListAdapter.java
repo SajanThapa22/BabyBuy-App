@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.babybuy.Activity.GoogleMapAct;
 import com.example.babybuy.Activity.UpdateItemAct;
 import com.example.babybuy.Activity.MessageActivity;
-import com.example.babybuy.Model.ItemDataModel;
+import com.example.babybuy.DataModels.ItemDataModel;
 import com.example.babybuy.R;
 
 import java.util.ArrayList;
@@ -26,7 +26,7 @@ public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ViewHo
 
     Context context;
     ArrayList<ItemDataModel> arrayList;
-    ItemDataModel pdm;
+    ItemDataModel itemdm;
 
 
     public ItemListAdapter(Context context, ArrayList<ItemDataModel> arrayList) {
@@ -37,23 +37,23 @@ public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ViewHo
 
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView producttitle, productdes, productprice, productquantity;
-        TextView productstatusbox;
-        ImageView pedit, pdelete, productimage, pmap, psms;
-        CardView productcardview;
+        TextView item_title, item_des, item_price, item_quan;
+        TextView item_stat_box;
+        ImageView itemedit, itemdelete, itemimage, itemlocate, item_sendsms;
+        CardView itemcard;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            producttitle = itemView.findViewById(R.id.product_title_id);
-            productdes = itemView.findViewById(R.id.product_des_id);
-            productprice = itemView.findViewById(R.id.product_price_id);
-            productquantity = itemView.findViewById(R.id.product_quantity_id);
-            productstatusbox = itemView.findViewById(R.id.productpurchasedstatus);
-            productimage = itemView.findViewById(R.id.product_img_id);
-            pedit = itemView.findViewById(R.id.productlistedit);
-            productcardview = itemView.findViewById(R.id.cardview_id);
-            pmap = itemView.findViewById(R.id.productlistmap);
-            psms = itemView.findViewById(R.id.productlistsms);
+            item_title = itemView.findViewById(R.id.itemidtitle);
+            item_des = itemView.findViewById(R.id.itemiddesc);
+            item_price = itemView.findViewById(R.id.itemidprice);
+            item_quan = itemView.findViewById(R.id.itemquanid);
+            item_stat_box = itemView.findViewById(R.id.statpurchaseditem);
+            itemimage = itemView.findViewById(R.id.itemidimg);
+            itemedit = itemView.findViewById(R.id.itemlistedit);
+            itemcard = itemView.findViewById(R.id.viewcardid);
+            itemlocate = itemView.findViewById(R.id.mapitemlist);
+            item_sendsms = itemView.findViewById(R.id.itemsms);
 
         }
     }
@@ -68,40 +68,40 @@ public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        pdm = arrayList.get(position);
+        itemdm = arrayList.get(position);
 
 
-        holder.producttitle.setText(pdm.getProductname());
-        holder.productdes.setText(pdm.getProductdescription());
-        holder.productprice.setText(String.valueOf(pdm.getProductprice()));
-        holder.productquantity.setText(String.valueOf(pdm.getProductquantity()));
-        Bitmap ImageDataInBitmap = BitmapFactory.decodeByteArray(pdm.getProductimage(), 0, pdm.getProductimage().length);
-        holder.productimage.setImageBitmap(ImageDataInBitmap);
+        holder.item_title.setText(itemdm.getNameitem());
+        holder.item_des.setText(itemdm.getDescripitem());
+        holder.item_price.setText(String.valueOf(itemdm.getPriceitem()));
+        holder.item_quan.setText(String.valueOf(itemdm.getQuanitem()));
+        Bitmap ImageDataInBitmap = BitmapFactory.decodeByteArray(itemdm.getImgitem(), 0, itemdm.getImgitem().length);
+        holder.itemimage.setImageBitmap(ImageDataInBitmap);
 
-        if (pdm.getProductstatus() < 0) {
-            holder.productstatusbox.setText("No");
+        if (itemdm.getStatusitem() < 0) {
+            holder.item_stat_box.setText("No");
         } else {
-            holder.productstatusbox.setText("Yes");
+            holder.item_stat_box.setText("Yes");
         }
 
-        holder.pmap.setOnClickListener(view -> {
-            Intent imap = new Intent(context, GoogleMapAct.class);
-            imap.putExtra("productid", pdm.getProductid());
-            imap.putExtra("productname", pdm.getProductname());
-            context.startActivity(imap);
+        holder.itemlocate.setOnClickListener(view -> {
+            Intent intmap = new Intent(context, GoogleMapAct.class);
+            intmap.putExtra("productid", itemdm.getIditem());
+            intmap.putExtra("productname", itemdm.getNameitem());
+            context.startActivity(intmap);
         });
 
-        holder.psms.setOnClickListener(view -> {
+        holder.item_sendsms.setOnClickListener(view -> {
             Intent imap = new Intent(context, MessageActivity.class);
-            imap.putExtra("productid", pdm.getProductid());
+            imap.putExtra("productid", itemdm.getIditem());
             context.startActivity(imap);
         });
 
 
-        holder.pedit.setOnClickListener(view -> {
+        holder.itemedit.setOnClickListener(view -> {
             Intent iedit = new Intent(context, UpdateItemAct.class);
-            iedit.putExtra("productid", pdm.getProductid());
-            iedit.putExtra("pcid", pdm.getProductcategoryid());
+            iedit.putExtra("productid", itemdm.getIditem());
+            iedit.putExtra("pcid", itemdm.getIdcatimg());
             context.startActivity(iedit);
         });
     }

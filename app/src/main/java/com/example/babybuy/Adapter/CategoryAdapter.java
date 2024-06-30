@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.babybuy.Activity.ItemListActivity;
 import com.example.babybuy.R;
-import com.example.babybuy.Model.CatDataModel;
+import com.example.babybuy.DataModels.CatDataModel;
 
 import java.util.ArrayList;
 
@@ -30,22 +30,21 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView ccatname;
-        ImageView ccatimage;
+        TextView cat_name;
+        ImageView cat_img;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            ccatname = itemView.findViewById(R.id.designcatname);
-            ccatimage = itemView.findViewById(R.id.ccatimage);
+            cat_name = itemView.findViewById(R.id.catname);
+            cat_img = itemView.findViewById(R.id.imgcat);
 
         }
     }
 
-    //oncreate view method
     @NonNull
     @Override
     public CategoryAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        //view generate, from is method, path define, group, use false to scroll
+
         View v = LayoutInflater.from(context).inflate(R.layout.category_card, parent, false);
         ViewHolder viewHolder = new ViewHolder(v);
         return viewHolder;
@@ -54,18 +53,18 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull CategoryAdapter.ViewHolder holder, int position) {
         CatDataModel catmodel = catarraymodel.get(position);
-        holder.ccatname.setText(catmodel.getCatname());
-        if(catmodel.getCatimage() != null & catmodel.getCatimage().length > 0){
-        Bitmap ImageDataInBitmap = BitmapFactory.decodeByteArray(catmodel.getCatimage(), 0, catmodel.getCatimage().length);
-        holder.ccatimage.setImageBitmap(ImageDataInBitmap);}
-        holder.ccatimage.setOnClickListener(v -> {
+        holder.cat_name.setText(catmodel.getNamecat());
+        if(catmodel.getImgcat() != null & catmodel.getImgcat().length > 0){
+        Bitmap ImageDataInBitmap = BitmapFactory.decodeByteArray(catmodel.getImgcat(), 0, catmodel.getImgcat().length);
+        holder.cat_img.setImageBitmap(ImageDataInBitmap);}
+        holder.cat_img.setOnClickListener(v -> {
             Intent intent = new Intent(context, ItemListActivity.class);
-            intent.putExtra("pcid", catmodel.getCatid());
+            intent.putExtra("pcid", catmodel.getIdcat());
             context.startActivity(intent);
         });
-        holder.ccatname.setOnClickListener(v -> {
+        holder.cat_name.setOnClickListener(v -> {
             Intent intent = new Intent(context, ItemListActivity.class);
-            intent.putExtra("pcid", catmodel.getCatid());
+            intent.putExtra("pcid", catmodel.getIdcat());
             context.startActivity(intent);
         });
     }

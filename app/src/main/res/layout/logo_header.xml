@@ -9,7 +9,7 @@
 
 
         <ImageView
-            android:id="@+id/logos"
+            android:id="@+id/bblogo"
             android:layout_width="176dp"
             android:layout_height="160dp"
             android:layout_gravity="center"

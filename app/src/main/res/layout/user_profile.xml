@@ -7,7 +7,7 @@
     tools:context="com.example.babybuy.Fragments.UserFragment">
 
     <RelativeLayout
-        android:id="@+id/rellay1"
+        android:id="@+id/layoutrel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#818181"
@@ -15,7 +15,7 @@
 
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/imgUser"
+            android:id="@+id/accountimg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
@@ -26,7 +26,7 @@
 
 
             <ImageView
-                android:id="@+id/imgUserr"
+                android:id="@+id/imgofuser"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_gravity="center"
@@ -35,13 +35,12 @@
         </androidx.cardview.widget.CardView>
 
         <TextView
-            android:id="@+id/tv_name"
+            android:id="@+id/namtv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/imgUser"
+            android:layout_below="@+id/accountimg"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="15sp"
-            android:fontFamily="sans-serif-light"
             android:text="Name"
             android:textColor="@color/white"
             android:textSize="32sp" />
@@ -52,7 +51,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/rellay1">
+        android:layout_below="@+id/layoutrel">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -76,10 +75,9 @@
                     android:textSize="13sp" />
 
                 <TextView
-                    android:id="@+id/userfragfullname"
+                    android:id="@+id/fullnameuser"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-light"
                     android:text="Sajan Thapa"
                     android:textColor="#000000"
                     android:textSize="18sp" />
@@ -88,7 +86,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="15dp"
-                    android:background="@color/bbcolor" />
+                    android:background="#dc2626" />
 
             </LinearLayout>
 
@@ -106,7 +104,7 @@
                     android:textSize="13sp" />
 
                 <TextView
-                    android:id="@+id/userfragEmail"
+                    android:id="@+id/useremail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-light"

@@ -22,7 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.babybuy.Database.Database;
-import com.example.babybuy.Model.ItemDataModel;
+import com.example.babybuy.DataModels.ItemDataModel;
 import com.example.babybuy.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -39,94 +39,93 @@ import java.util.Locale;
 
 public class UpdateItemAct extends AppCompatActivity implements OnMapReadyCallback {
 
-    SupportMapFragment smf;
+    SupportMapFragment smfrag;
     FusedLocationProviderClient client;
-    GoogleMap mgoogleMap;
+    GoogleMap map_location;
     NetworkInfo networkInfo;
-    ConnectivityManager manager;
+    ConnectivityManager mngr;
     List<Address> address;
-    ArrayList<ItemDataModel> pdm;
-    Database db;
+    ArrayList<ItemDataModel> itemdm;
+    Database database;
     Geocoder geocoder;
-    TextView productaddcamera, productaddgallery;
-    Button productupdatebtn;
-    ImageView productaddimage, backicon;
-    EditText productaddname, productadddes, productaddquantity, productaddprice;
+    TextView itemimgcam, itemimggallery;
+    Button btnitemupdate;
+    ImageView itemaddimg, iconback;
+    EditText item_name, item_address, item_quan, item_price;
     final int CAMERA_CODE = 100;
     final int GALLERY_CODE = 200;
     Double lat, lng;
-    ItemDataModel productDataModel;
-    Integer id, catid;
+    ItemDataModel itemDataModel;
+    Integer id, category_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_item);
         id = getIntent().getExtras().getInt("productid");
-        catid = getIntent().getExtras().getInt("pcid");
-        db = new Database(this);
+        category_id = getIntent().getExtras().getInt("pcid");
+        database = new Database(this);
 
-        //change notification color
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = this.getWindow();
             window.setStatusBarColor(this.getResources().getColor(R.color.greencolor));
         }
 
-        //id connected
-        productupdatebtn = findViewById(R.id.productupdatebtnid);
-        productaddname = findViewById(R.id.productupdatetitleid);
-        productaddquantity = findViewById(R.id.productupdatequantityid);
-        productadddes = findViewById(R.id.productuodatedesid);
-        productaddprice = findViewById(R.id.productupdatepriceid);
-        productaddimage = findViewById(R.id.itemupdateimgid);
-        productaddgallery = findViewById(R.id.productupdatefromgallery);
-        productaddcamera = findViewById(R.id.productupdatefromcamera);
-        backicon = findViewById(R.id.upbgimg);
+        //connecting all the required IDs
+        btnitemupdate = findViewById(R.id.productupdatebtnid);
+        item_name = findViewById(R.id.productupdatetitleid);
+        item_quan = findViewById(R.id.productupdatequantityid);
+        item_address = findViewById(R.id.productuodatedesid);
+        item_price = findViewById(R.id.productupdatepriceid);
+        itemaddimg = findViewById(R.id.itemupdateimgid);
+        itemimggallery = findViewById(R.id.productupdatefromgallery);
+        itemimgcam = findViewById(R.id.productupdatefromcamera);
+        iconback = findViewById(R.id.upbgimg);
 
 
-        //add product image from gallery
-        productaddgallery.setOnClickListener(v -> {
-            Intent igallery = new Intent(Intent.ACTION_PICK);
-            igallery.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-            startActivityForResult(igallery, GALLERY_CODE);
+        //select image from gallery
+        itemimggallery.setOnClickListener(v -> {
+            Intent intgallery = new Intent(Intent.ACTION_PICK);
+            intgallery.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            startActivityForResult(intgallery, GALLERY_CODE);
         });
 
-        //add product image from camera
-        productaddcamera.setOnClickListener(v -> {
-            Intent icamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            startActivityForResult(icamera, CAMERA_CODE);
+        //select image from camera
+        itemimgcam.setOnClickListener(v -> {
+            Intent intcamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            startActivityForResult(intcamera, CAMERA_CODE);
         });
-        smf = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.location_map);
-        smf.getMapAsync(this);
+        smfrag = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.location_map);
+        smfrag.getMapAsync(this);
 
-        productupdatebtn.setOnClickListener(v -> {
+        btnitemupdate.setOnClickListener(v -> {
             ItemAddActivity adp = new ItemAddActivity();
-            productDataModel = new ItemDataModel();
-            productDataModel.setProductimage(adp.convertImageViewToByteArray(productaddimage));
-            productDataModel.setProductname(productaddname.getText().toString());
-            productDataModel.setProductquantity(Integer.parseInt(productaddquantity.getText().toString()));
-            productDataModel.setProductprice(Double.parseDouble(productaddprice.getText().toString()));
-            productDataModel.setProductdescription(productadddes.getText().toString());
-            productDataModel.setProductstatus(pdm.get(0).getProductstatus());
-            productDataModel.setProductcategoryid(pdm.get(0).getProductcategoryid());
-            productDataModel.setProductlat(lat);
-            productDataModel.setProductlong(lng);
+            itemDataModel = new ItemDataModel();
+            itemDataModel.setImgitem(adp.convertImageViewToByteArray(itemaddimg));
+            itemDataModel.setNameitem(item_name.getText().toString());
+            itemDataModel.setQuanitem(Integer.parseInt(item_quan.getText().toString()));
+            itemDataModel.setPriceitem(Double.parseDouble(item_price.getText().toString()));
+            itemDataModel.setDescripitem(item_address.getText().toString());
+            itemDataModel.setStatusitem(itemdm.get(0).getStatusitem());
+            itemDataModel.setIdcatimg(itemdm.get(0).getIdcatimg());
+            itemDataModel.setLatitem(lat);
+            itemDataModel.setLongitem(lng);
 
-            int result = db.updateproduct(productDataModel, pdm.get(0).getProductid());
+            int result = database.updateitem(itemDataModel, itemdm.get(0).getIditem());
             if (result == -1) {
                 Toast.makeText(this, "failed", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(this, "Succcess", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(UpdateItemAct.this, ItemListActivity.class);
-                intent.putExtra("pcid", pdm.get(0).getProductcategoryid());
+                intent.putExtra("pcid", itemdm.get(0).getIdcatimg());
                 startActivity(intent);
             }
         });
 
-        //back to productlistactivity
-        backicon.setOnClickListener(v -> {
+        //redirect to ItemListActivity
+        iconback.setOnClickListener(v -> {
             Intent intent = new Intent(UpdateItemAct.this, ItemListActivity.class);
-            intent.putExtra("pcid", pdm.get(0).getProductcategoryid());
+            intent.putExtra("pcid", itemdm.get(0).getIdcatimg());
             startActivity(intent);
         });
     }
@@ -138,30 +137,30 @@ public class UpdateItemAct extends AppCompatActivity implements OnMapReadyCallba
             if (requestCode == CAMERA_CODE) {
                 //for camera
                 Bitmap img = (Bitmap) (data.getExtras().get("data"));
-                productaddimage.setImageBitmap(img);
+                itemaddimg.setImageBitmap(img);
             } else if (requestCode == GALLERY_CODE) {
                 //for gallery
-                productaddimage.setImageURI(data.getData());
+                itemaddimg.setImageURI(data.getData());
             }
         }
     }
 
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
-        mgoogleMap = googleMap;
-        pdm = db.productfetchdataformapload(id);
+        map_location = googleMap;
+        itemdm = database.itemfetchdataformapload(id);
 
-        productaddname.setText(pdm.get(0).getProductname());
-        productaddquantity.setText(String.valueOf(pdm.get(0).getProductquantity()));
-        productaddprice.setText(String.valueOf(pdm.get(0).getProductprice()));
-        productadddes.setText(pdm.get(0).getProductdescription());
-        Bitmap ImageDataInBitmap = BitmapFactory.decodeByteArray(pdm.get(0).getProductimage(), 0, pdm.get(0).getProductimage().length);
-        productaddimage.setImageBitmap(ImageDataInBitmap);
+        item_name.setText(itemdm.get(0).getNameitem());
+        item_quan.setText(String.valueOf(itemdm.get(0).getQuanitem()));
+        item_price.setText(String.valueOf(itemdm.get(0).getPriceitem()));
+        item_address.setText(itemdm.get(0).getDescripitem());
+        Bitmap ImageDataInBitmap = BitmapFactory.decodeByteArray(itemdm.get(0).getImgitem(), 0, itemdm.get(0).getImgitem().length);
+        itemaddimg.setImageBitmap(ImageDataInBitmap);
 
         checkConnection();
         if (networkInfo.isConnected() && networkInfo.isAvailable()) {
-            lat = pdm.get(0).getProductlat();
-            lng = pdm.get(0).getProductlong();
+            lat = itemdm.get(0).getLatitem();
+            lng = itemdm.get(0).getLongitem();
             try {
                 getitemlocation(lat, lng);
             } catch (IOException e) {
@@ -171,8 +170,8 @@ public class UpdateItemAct extends AppCompatActivity implements OnMapReadyCallba
             Toast.makeText(this, "Please Check Network", Toast.LENGTH_SHORT).show();
         }
 
-        mgoogleMap.setOnMapClickListener(lating -> {
-            mgoogleMap.clear();
+        map_location.setOnMapClickListener(lating -> {
+            map_location.clear();
 
             checkConnection();
             if (networkInfo.isConnected() && networkInfo.isAvailable()) {
@@ -190,10 +189,10 @@ public class UpdateItemAct extends AppCompatActivity implements OnMapReadyCallba
         });
     }
 
-    //check internet connectivity
+    //for checking internet connection
     public void checkConnection() {
-        manager = (ConnectivityManager) getApplicationContext().getSystemService(CONNECTIVITY_SERVICE);
-        networkInfo = manager.getActiveNetworkInfo();
+        mngr = (ConnectivityManager) getApplicationContext().getSystemService(CONNECTIVITY_SERVICE);
+        networkInfo = mngr.getActiveNetworkInfo();
     }
 
 
@@ -209,7 +208,7 @@ public class UpdateItemAct extends AppCompatActivity implements OnMapReadyCallba
                 String postalCode = address.get(0).getPostalCode();
                 String knownName = address.get(0).getFeatureName();
 
-                String productaddress = pdm.get(0).getProductname() + " " + mAddress;
+                String productaddress = itemdm.get(0).getNameitem() + " " + mAddress;
 
 
                 if (mAddress != null) {
@@ -217,8 +216,8 @@ public class UpdateItemAct extends AppCompatActivity implements OnMapReadyCallba
                     LatLng lating = new LatLng(mlat, mlng);
                     mmarkerOptions.position(lating).title(productaddress);
 
-                    mgoogleMap.addMarker(mmarkerOptions).showInfoWindow();
-                    mgoogleMap.animateCamera(CameraUpdateFactory
+                    map_location.addMarker(mmarkerOptions).showInfoWindow();
+                    map_location.animateCamera(CameraUpdateFactory
                             .newLatLngZoom(lating, 17));
 
 
@@ -237,7 +236,7 @@ public class UpdateItemAct extends AppCompatActivity implements OnMapReadyCallba
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(UpdateItemAct.this, ItemListActivity.class);
-        intent.putExtra("pcid", pdm.get(0).getProductcategoryid());
+        intent.putExtra("pcid", itemdm.get(0).getIdcatimg());
         startActivity(intent);
     }
 }

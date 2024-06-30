@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:cardview="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/cardview_id"
+    android:id="@+id/viewcardid"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:clickable="true"
-    android:background="@drawable/babybuy_lunching_logo">
+    android:background="@color/bg_gray">
 
 
     <LinearLayout
-        android:id="@+id/imagelayout"
-        android:background="@color/colorPrimaryDark"
+        android:id="@+id/layoutimg"
+        android:background="@color/bg_gray"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <ImageView
-            android:id="@+id/product_img_id"
+            android:id="@+id/itemidimg"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:background="@color/solidCircle"
@@ -28,10 +28,9 @@
             android:padding="10dp">
 
             <TextView
-                android:id="@+id/product_title_id"
+                android:id="@+id/itemidtitle"
                 android:layout_width="200dp"
                 android:layout_height="30dp"
-                android:fontFamily="sans-serif-medium"
                 android:gravity="left"
                 android:text="Title"
                 android:textColor="@color/colorBlack"
@@ -40,21 +39,20 @@
                 cardview:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/product_des_id"
+                android:id="@+id/itemiddesc"
                 android:layout_width="200dp"
                 android:layout_height="20dp"
                 android:layout_marginTop="5dp"
-                android:fontFamily="sans-serif-medium"
                 android:gravity="left"
                 android:inputType="textMultiLine"
                 android:text="Description"
                 android:textColor="@color/colorBlack"
                 android:textSize="15sp"
                 cardview:layout_constraintStart_toStartOf="parent"
-                cardview:layout_constraintTop_toBottomOf="@+id/product_title_id" />
+                cardview:layout_constraintTop_toBottomOf="@+id/itemidtitle" />
 
             <TextView
-                android:id="@+id/product_quantity_id"
+                android:id="@+id/itemquanid"
                 android:layout_width="120dp"
                 android:layout_height="20dp"
                 android:layout_marginTop="5dp"
@@ -63,10 +61,10 @@
                 android:textColor="@color/colorBlack"
                 android:textSize="15sp"
                 cardview:layout_constraintStart_toStartOf="parent"
-                cardview:layout_constraintTop_toBottomOf="@+id/product_des_id" />
+                cardview:layout_constraintTop_toBottomOf="@+id/itemiddesc" />
 
             <TextView
-                android:id="@+id/productpurchased"
+                android:id="@+id/purchaseditem"
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"
                 android:layout_marginTop="5dp"
@@ -75,10 +73,10 @@
                 android:textColor="@color/colorBlack"
                 android:textSize="15sp"
                 cardview:layout_constraintStart_toStartOf="parent"
-                cardview:layout_constraintTop_toBottomOf="@+id/product_quantity_id" />
+                cardview:layout_constraintTop_toBottomOf="@+id/itemquanid" />
 
             <TextView
-                android:id="@+id/productpurchasedstatus"
+                android:id="@+id/statpurchaseditem"
                 android:layout_width="100dp"
                 android:layout_height="20dp"
                 android:layout_marginStart="10dp"
@@ -87,12 +85,12 @@
                 android:text="No"
                 android:textColor="@color/colorWhite"
                 android:textSize="15sp"
-                cardview:layout_constraintStart_toEndOf="@+id/productpurchased"
-                cardview:layout_constraintTop_toBottomOf="@+id/product_quantity_id" />
+                cardview:layout_constraintStart_toEndOf="@+id/purchaseditem"
+                cardview:layout_constraintTop_toBottomOf="@+id/itemquanid" />
 
 
             <TextView
-                android:id="@+id/product_price"
+                android:id="@+id/priceitem"
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"
                 android:layout_marginTop="5dp"
@@ -101,10 +99,10 @@
                 android:textColor="@color/colorBlack"
                 android:textSize="15sp"
                 cardview:layout_constraintStart_toStartOf="parent"
-                cardview:layout_constraintTop_toBottomOf="@+id/productpurchased" />
+                cardview:layout_constraintTop_toBottomOf="@+id/purchaseditem" />
 
             <TextView
-                android:id="@+id/product_price_id"
+                android:id="@+id/itemidprice"
                 android:layout_width="100dp"
                 android:layout_height="20dp"
                 android:layout_marginStart="10dp"
@@ -113,8 +111,8 @@
                 android:text="30000"
                 android:textColor="@color/colorWhite"
                 android:textSize="15sp"
-                cardview:layout_constraintStart_toEndOf="@id/product_price"
-                cardview:layout_constraintTop_toBottomOf="@+id/productpurchased" />
+                cardview:layout_constraintStart_toEndOf="@id/priceitem"
+                cardview:layout_constraintTop_toBottomOf="@+id/purchaseditem" />
 
 
             <TableLayout
@@ -131,7 +129,7 @@
                     android:layout_height="38dp">
 
                     <ImageView
-                        android:id="@+id/productlistsms"
+                        android:id="@+id/itemsms"
                         android:layout_width="39dp"
                         android:layout_height="39dp"
                         android:layout_gravity="center"
@@ -144,7 +142,7 @@
                 <TableRow>
 
                     <ImageView
-                        android:id="@+id/productlistmap"
+                        android:id="@+id/mapitemlist"
                         android:layout_width="45dp"
                         android:layout_height="40dp"
                         android:layout_gravity="center"
@@ -158,7 +156,7 @@
 
                     <ImageView
 
-                        android:id="@+id/productlistedit"
+                        android:id="@+id/itemlistedit"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_gravity="center"

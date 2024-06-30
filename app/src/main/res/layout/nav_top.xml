@@ -12,7 +12,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:background="#4CAF50"
-        android:id="@+id/ttoolbar"
+        android:id="@+id/topbarnavi"
         app:titleTextColor="#F3A1B1">
 
       <TextView
@@ -28,6 +28,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="53dp"
-        android:id="@+id/f_container">
+        android:id="@+id/framebox">
     </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

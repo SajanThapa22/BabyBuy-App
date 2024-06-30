@@ -9,7 +9,7 @@
 
 
         <ImageView
-            android:id="@+id/catimgid"
+            android:id="@+id/categoimgid"
             android:layout_width="250dp"
             android:layout_height="250dp"
             android:layout_gravity="center"
@@ -19,14 +19,14 @@
 
 
     <LinearLayout
-        android:id="@+id/layoutprodlinear"
+        android:id="@+id/itemlayout"
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center">
 
         <TextView
-            android:id="@+id/cataddfromgallery"
+            android:id="@+id/imgcatgallery"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="8dp"
@@ -34,7 +34,7 @@
             android:text="@string/from_gallery" />
 
         <TextView
-            android:id="@+id/cataddfromcamera"
+            android:id="@+id/imgcatcam"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="8dp"
@@ -44,7 +44,7 @@
     </LinearLayout>
 
     <EditText
-        android:id="@+id/edittextcatname"
+        android:id="@+id/catnamedit"
         android:padding="10dp"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_48sdp"

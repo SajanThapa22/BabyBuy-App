@@ -122,7 +122,6 @@
         android:backgroundTint="#46333332"
         android:drawablePadding="10dp"
         android:ems="10"
-        android:fontFamily="sans-serif-medium"
         android:hint="Confirm Password"
         android:inputType="textPassword"
         android:minHeight="48dp"
@@ -145,7 +144,6 @@
         android:layout_height="71dp"
         android:layout_marginTop="30dp"
         android:backgroundTint="@color/greencolor"
-        android:fontFamily="sans-serif-medium"
         android:text="Register"
         android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="@+id/item_price"
@@ -154,19 +152,19 @@
         app:layout_constraintTop_toBottomOf="@+id/item_price" />
 
     <TextView
-        android:id="@+id/ahaa"
+        android:id="@+id/accountalready"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:fontFamily="sans-serif-medium"
-        android:text="Already have an account, "
+        android:text="Do you already have an account, "
         app:layout_constraintEnd_toEndOf="@+id/btn_sms"
         app:layout_constraintHorizontal_bias="0.02"
         app:layout_constraintStart_toStartOf="@+id/btn_sms"
         app:layout_constraintTop_toBottomOf="@+id/btn_sms" />
 
     <TextView
-        android:id="@+id/rsingup"
+        android:id="@+id/signup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-medium"
@@ -177,6 +175,6 @@
         android:text="Click here to Login"
         android:textColor="#3F51B5"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/ahaa"
+        app:layout_constraintStart_toEndOf="@+id/accountalready"
         app:layout_constraintTop_toBottomOf="@+id/btn_sms" />
 </androidx.constraintlayout.widget.ConstraintLayout>

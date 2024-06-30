@@ -24,28 +24,26 @@ public class RegisterActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
-        Database db = new Database(this);
+        setContentView(R.layout.register_activity);
+        Database database = new Database(this);
 
-        //For input value
+        //connecting all the input fields IDs
         Username = findViewById(R.id.phn_no);
         Userlastname = findViewById(R.id.item_title);
         Useremail = findViewById(R.id.item_des);
         Userpassword = findViewById(R.id.item_quan);
         Usercpassword = findViewById(R.id.item_price);
 
-        //inorder to change notification color
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = this.getWindow();
             window.setStatusBarColor(this.getResources().getColor(R.color.greencolor));
         }
 
-
-        //to register and redirect to login
         rdrbtn = findViewById(R.id.btn_sms);
-        redirecttologin = findViewById(R.id.rsingup);
+        redirecttologin = findViewById(R.id.signup);
 
-        //Clicklistner add for register button
+        //onClicklistner add for register button
         rdrbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -62,43 +60,36 @@ public class RegisterActivity extends AppCompatActivity {
                 if (firstname.isEmpty() || lastname.isEmpty() || email.isEmpty() || password.isEmpty() || cpassword.isEmpty()) {
                     Toast.makeText(RegisterActivity.this, "Enter all data", Toast.LENGTH_SHORT).show();
                 } else {
-
                     if (Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-
                         //password length checked
                         if (password.length() >= 8) {
-
                             //password and confirm password checked
                             if (password.equals(cpassword)) {
-
                                 //email already exist or not checked
-                                boolean checkuser = db.checkemail(email);
+                                boolean checkuser = database.checkemail(email);
 
                                 if (checkuser == false) {
                                     Toast.makeText(RegisterActivity.this, "user already exist", Toast.LENGTH_SHORT).show();
                                 } else {
-                                    //insert data to Database
-                                    boolean i = db.insert(firstname, lastname, email, password);
-                                    // after successfully inserted
+                                    boolean i = database.insert(firstname, lastname, email, password);
+
                                     if (i == true) {
                                         Toast.makeText(RegisterActivity.this, "successfully update", Toast.LENGTH_SHORT).show();
                                         startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
                                     }
-
-                                    //incase any problem occured
+                                    //for errors
                                     else {
                                         Toast.makeText(RegisterActivity.this, "Failed to update", Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             }
-                            //incase password and confirm password
+                            //for checking password and confirm password match or not
                             else {
                                 Usercpassword.setError("confirm password doesn't match");
                                 Toast.makeText(RegisterActivity.this, "confirm password doesn't match", Toast.LENGTH_SHORT).show();
                             }
                         }
-
-                        //if password length doesn't match
+                        //for password length check
                         else {
                             Userpassword.setError("minimum 8 length");
                             Toast.makeText(RegisterActivity.this, "Enter 8 digit password", Toast.LENGTH_SHORT).show();
@@ -113,8 +104,6 @@ public class RegisterActivity extends AppCompatActivity {
                 }
             }
         });
-
-
         redirecttologin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -123,7 +112,6 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
     }
-
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);

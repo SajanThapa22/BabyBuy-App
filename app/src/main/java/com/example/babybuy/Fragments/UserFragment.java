@@ -34,46 +34,44 @@ public class UserFragment extends Fragment {
     }
 
     final int GALLERY_CODE = 200;
-    Database db;
+    Database database;
     String value;
-    TextView userfragFullname, userfragEmail, userfragFullnameforlogo;
-    ImageView profile;
-    byte[] imagebyte;
+    TextView userFullname, userEmail, userfullnamelogo;
+    ImageView profiledetail;
+    byte[] imgbyte;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.user_profile, container, false);
-        userfragFullname = view.findViewById(R.id.userfragfullname);
-        userfragEmail = view.findViewById(R.id.userfragEmail);
-        userfragFullnameforlogo = view.findViewById(R.id.tv_name);
-        profile = view.findViewById(R.id.imgUserr);
+        userFullname = view.findViewById(R.id.fullnameuser);
+        userEmail = view.findViewById(R.id.useremail);
+        userfullnamelogo = view.findViewById(R.id.namtv);
+        profiledetail = view.findViewById(R.id.imgofuser);
 
         SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences("Login", 0);
         value = sharedPreferences.getString("email", "null");
-        db = new Database(getActivity());
+        database = new Database(getActivity());
 
 
         try {
-            imagebyte = db.authfetchforimage(value);
-
-
-            Bitmap ImageDataInBitmap = BitmapFactory.decodeByteArray(imagebyte, 0, imagebyte.length);
-            profile.setImageBitmap(ImageDataInBitmap);
+            imgbyte = database.authfetchforimage(value);
+            Bitmap ImageDataInBitmap = BitmapFactory.decodeByteArray(imgbyte, 0, imgbyte.length);
+            profiledetail.setImageBitmap(ImageDataInBitmap);
         }catch (Exception ex){
 
         }
 
 
         if (value != null) {
-            String fullname = db.getfullname(value);
-            userfragEmail.setText(value);
-            userfragFullname.setText(fullname);
-            userfragFullnameforlogo.setText(fullname);
+            String fullname = database.getfullname(value);
+            userEmail.setText(value);
+            userFullname.setText(fullname);
+            userfullnamelogo.setText(fullname);
         }
 
-        profile.setOnClickListener(view1 -> {
+        profiledetail.setOnClickListener(view1 -> {
             Intent igallery = new Intent(Intent.ACTION_PICK);
             igallery.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
             startActivityForResult(igallery, GALLERY_CODE);
@@ -88,11 +86,11 @@ public class UserFragment extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
             if (requestCode == GALLERY_CODE) {
-                //for gallery
+                //from gallery
                 SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences("Login", 0);
                 value = sharedPreferences.getString("email", "null");
-                profile.setImageURI(data.getData());
-                int result = db.updateimage(convertImageViewToByteArray(profile), value);
+                profiledetail.setImageURI(data.getData());
+                int result = database.updateimage(convertImageViewToByteArray(profiledetail), value);
 
                 if (result < 0) {
                     Toast.makeText(getActivity(), "Failed", Toast.LENGTH_SHORT).show();

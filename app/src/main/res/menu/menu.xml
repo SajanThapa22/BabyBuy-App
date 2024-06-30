@@ -2,27 +2,24 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
             <item
-                android:id="@+id/mcategory"
+                android:id="@+id/menucat"
                 android:title="Category" />
             <item
-                android:id="@+id/mproduct"
+                android:id="@+id/menuitem"
                 android:title="Manage Product" />
 
 
             <item
-                android:id="@+id/msendsms"
+                android:id="@+id/menusms"
                 android:title="SMS" />
 
-<!--            <item-->
-<!--                android:id="@+id/msizechart"-->
-<!--                android:title="Chart" />-->
 
             <item
-                android:id="@+id/mmuser"
+                android:id="@+id/menuuserprofile"
                 android:title="User Profile" />
 
             <item
-                android:id="@+id/mlogout"
+                android:id="@+id/menulogout"
                 android:title="Logout" />
 
 </menu>

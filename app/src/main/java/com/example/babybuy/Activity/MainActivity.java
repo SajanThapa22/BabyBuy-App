@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
         //connect id for navigation view
         drawerLayout = findViewById(R.id.homes);
         navigationView = findViewById(R.id.nav_view);
-        toolbar = findViewById(R.id.ttoolbar);
+        toolbar = findViewById(R.id.topbarnavi);
 
 
         //change notification color
@@ -107,16 +107,16 @@ public class MainActivity extends AppCompatActivity {
                 int id = item.getItemId();
                 switch (id) {
 
-                    case R.id.mcategory: {
+                    case R.id.menucat: {
                         loadFragment(new HomeFragment());
                         break;
                     }
-                    case R.id.mproduct: {
+                    case R.id.menuitem: {
                         loadFragment(new ManItemFragment());
                         break;
                     }
 
-                    case R.id.msendsms: {
+                    case R.id.menusms: {
                         startActivity(new Intent(MainActivity.this, MessageActivity.class));
                         break;
                     }
@@ -126,12 +126,12 @@ public class MainActivity extends AppCompatActivity {
 //                        break;
 //                    }
 
-                    case R.id.mmuser: {
+                    case R.id.menuuserprofile: {
                         loadFragment(new UserFragment());
                         break;
                     }
 
-                    case R.id.mlogout: {
+                    case R.id.menulogout: {
                         SharedPreferences sp=getSharedPreferences("Login", MODE_PRIVATE);
                         sp.edit().clear().apply();
                         startActivity(new Intent(MainActivity.this, LoginActivity.class));
@@ -148,7 +148,7 @@ public class MainActivity extends AppCompatActivity {
     public void loadFragment(Fragment fragment) {
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
-        ft.replace(R.id.f_container, fragment);
+        ft.replace(R.id.framebox, fragment);
         ft.commit();
     }
 
@@ -211,7 +211,7 @@ public class MainActivity extends AppCompatActivity {
                             || ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA)
                             || ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_EXTERNAL_STORAGE)
                             || ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)) {
-                        showDialogOK("SMS, Camera, Location Services Permission required for this app",
+                        dialogshow("SMS, Camera, Location Services Permission required for this app",
                                 new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
@@ -233,7 +233,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void showDialogOK(String message, DialogInterface.OnClickListener okListener) {
+    private void dialogshow(String message, DialogInterface.OnClickListener okListener) {
         new AlertDialog.Builder(this)
                 .setMessage(message)
                 .setPositiveButton("OK", okListener)
@@ -242,15 +242,15 @@ public class MainActivity extends AppCompatActivity {
                 .show();
     }
 
-    private static long back_pressed;
+    private static long press_back;
     @Override
     public void onBackPressed() {
-        if (back_pressed + 2000 > System.currentTimeMillis()) {
+        if (press_back + 2000 > System.currentTimeMillis()) {
             super.onBackPressed();
         } else {
             Toast.makeText(getBaseContext(), "Press once again to exit",
                     Toast.LENGTH_SHORT).show();
-            back_pressed = System.currentTimeMillis();
+            press_back = System.currentTimeMillis();
         }
     }
 }

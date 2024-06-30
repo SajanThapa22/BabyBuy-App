@@ -18,7 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.babybuy.Database.Database;
-import com.example.babybuy.Model.ItemDataModel;
+import com.example.babybuy.DataModels.ItemDataModel;
 import com.example.babybuy.R;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -30,15 +30,15 @@ public class ItemAddActivity extends AppCompatActivity implements OnMapReadyCall
 
 
     NetworkInfo networkInfo;
-    ConnectivityManager manager;
+    ConnectivityManager mngr;
 
     TextView imgfromcam, imgfromgallery;
     Button additembtn;
-    ImageView productaddimage, backicon;
+    ImageView itemaddimage, backicon;
     EditText itemname, additem, itemquan, itemprice;
     final int CAMERA_CODE = 100;
     final int GALLERY_CODE = 200;
-    ItemDataModel productDataModel;
+    ItemDataModel itemDataModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,48 +48,48 @@ public class ItemAddActivity extends AppCompatActivity implements OnMapReadyCall
 
         int itemcatidlist = getIntent().getExtras().getInt("pcid");
 
-        //Connection to database
-        Database db = new Database(this);
+        //for connecting to database
+        Database database = new Database(this);
 
-        //connecting all the need IDs
-        additembtn = findViewById(R.id.addprodbtn);
-        itemname = findViewById(R.id.prodtitle);
-        itemquan = findViewById(R.id.prodquanid);
+        //connecting all the required IDs
+        additembtn = findViewById(R.id.additembtn);
+        itemname = findViewById(R.id.itemtitle);
+        itemquan = findViewById(R.id.iditemquantity);
         itemprice = findViewById(R.id.addpriceid);
-        additem = findViewById(R.id.prodaddrid);
-        productaddimage = findViewById(R.id.prodimgid);
+        additem = findViewById(R.id.itemaddrid);
+        itemaddimage = findViewById(R.id.itemimgid);
         imgfromgallery = findViewById(R.id.imgfromgallery);
         imgfromcam = findViewById(R.id.imgfromcam);
         backicon = findViewById(R.id.bgimg);
 
 
-        //add product image from gallery
+        //add item image from gallery
         imgfromgallery.setOnClickListener(v -> {
             Intent intgallery = new Intent(Intent.ACTION_PICK);
             intgallery.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
             startActivityForResult(intgallery, GALLERY_CODE);
         });
 
-        //add product image from camera
+        //add item image from camera
         imgfromcam.setOnClickListener(v -> {
             Intent intcamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             startActivityForResult(intcamera, CAMERA_CODE);
         });
 
-        //for adding product data in product table in the database
+        //for adding item data in item table in the database
         additembtn.setOnClickListener(v -> {
 
-            Integer prdstatus = -1;
-            productDataModel = new ItemDataModel();
-            productDataModel.setProductimage(convertImageViewToByteArray(productaddimage));
-            productDataModel.setProductname(itemname.getText().toString());
-            productDataModel.setProductquantity(Integer.parseInt(itemquan.getText().toString()));
-            productDataModel.setProductprice(Double.parseDouble(itemprice.getText().toString()));
-            productDataModel.setProductdescription(additem.getText().toString());
-            productDataModel.setProductstatus(prdstatus);
-            productDataModel.setProductcategoryid(itemcatidlist);
+            Integer itemstatus = -1;
+            itemDataModel = new ItemDataModel();
+            itemDataModel.setImgitem(convertImageViewToByteArray(itemaddimage));
+            itemDataModel.setNameitem(itemname.getText().toString());
+            itemDataModel.setQuanitem(Integer.parseInt(itemquan.getText().toString()));
+            itemDataModel.setPriceitem(Double.parseDouble(itemprice.getText().toString()));
+            itemDataModel.setDescripitem(additem.getText().toString());
+            itemDataModel.setStatusitem(itemstatus);
+            itemDataModel.setIdcatimg(itemcatidlist);
 
-            long result = db.productadd(productDataModel);
+            long result = database.itemadd(itemDataModel);
             if (result == -1) {
                 Toast.makeText(this, "failed", Toast.LENGTH_SHORT).show();
             } else {
@@ -100,7 +100,7 @@ public class ItemAddActivity extends AppCompatActivity implements OnMapReadyCall
             }
         });
 
-        //returning back to productListActivity
+        //returning back to ItemListActivity
         backicon.setOnClickListener(v -> {
             Intent intent = new Intent(ItemAddActivity.this, ItemListActivity.class);
             intent.putExtra("pcid", itemcatidlist);
@@ -118,10 +118,10 @@ public class ItemAddActivity extends AppCompatActivity implements OnMapReadyCall
             if (requestCode == CAMERA_CODE) {
                 //for image from camera
                 Bitmap img = (Bitmap) (data.getExtras().get("data"));
-                productaddimage.setImageBitmap(img);
+                itemaddimage.setImageBitmap(img);
             } else if (requestCode == GALLERY_CODE) {
                 //for image from gallery
-                productaddimage.setImageURI(data.getData());
+                itemaddimage.setImageURI(data.getData());
             }
         }
     }
@@ -140,8 +140,8 @@ public class ItemAddActivity extends AppCompatActivity implements OnMapReadyCall
 
     //for checking internet connection
     public void checkConnection() {
-        manager = (ConnectivityManager) getApplicationContext().getSystemService(CONNECTIVITY_SERVICE);
-        networkInfo = manager.getActiveNetworkInfo();
+        mngr = (ConnectivityManager) getApplicationContext().getSystemService(CONNECTIVITY_SERVICE);
+        networkInfo = mngr.getActiveNetworkInfo();
     }
 
 }

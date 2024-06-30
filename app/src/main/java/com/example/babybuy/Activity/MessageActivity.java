@@ -14,7 +14,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.babybuy.Database.Database;
-import com.example.babybuy.Model.ItemDataModel;
+import com.example.babybuy.DataModels.ItemDataModel;
 import com.example.babybuy.R;
 
 import java.util.ArrayList;
@@ -99,13 +99,13 @@ public class MessageActivity extends AppCompatActivity {
     }
 
     public void settext() {
-        ArrayList<ItemDataModel> pdm = database.productfetchdataformapload(pid);
+        ArrayList<ItemDataModel> pdm = database.itemfetchdataformapload(pid);
         Toast.makeText(this, "SMS Section", Toast.LENGTH_SHORT).show();
-        s_title.setText(pdm.get(0).getProductname());
-        s_descrip.setText(pdm.get(0).getProductdescription());
-        s_quan.setText(String.valueOf(pdm.get(0).getProductquantity()));
-        s_cost.setText(String.valueOf(pdm.get(0).getProductprice()));
-        s_locate.setText(pdm.get(0).getProductaddress());
+        s_title.setText(pdm.get(0).getNameitem());
+        s_descrip.setText(pdm.get(0).getDescripitem());
+        s_quan.setText(String.valueOf(pdm.get(0).getQuanitem()));
+        s_cost.setText(String.valueOf(pdm.get(0).getPriceitem()));
+        s_locate.setText(pdm.get(0).getAddressitem());
     }
 
     @Override

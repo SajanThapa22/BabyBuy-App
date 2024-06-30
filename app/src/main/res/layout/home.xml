@@ -22,7 +22,7 @@
         app:layout_constraintVertical_bias="0.5">
 
         <ImageView
-            android:id="@+id/catimgid"
+            android:id="@+id/categoimgid"
             android:layout_width="245dp"
             android:layout_height="245dp"
             android:layout_gravity="center"

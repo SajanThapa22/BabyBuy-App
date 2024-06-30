@@ -9,19 +9,18 @@
     android:padding="@dimen/_5sdp">
 
         <ImageView
-            android:id="@+id/ccatimage"
+            android:id="@+id/imgcat"
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:scaleType="centerCrop"/>
 
     <TextView
-        android:id="@+id/designcatname"
+        android:id="@+id/catname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ellipsize="end"
         android:text="Hello"
         android:textColor="#fff"
-        android:fontFamily="sans-serif-medium"
         android:gravity="center|bottom"
         android:singleLine="true"
         android:textAlignment="center"

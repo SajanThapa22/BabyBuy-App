@@ -28,7 +28,7 @@ import android.widget.Toast;
 
 import com.example.babybuy.Adapter.CategoryAdapter;
 import com.example.babybuy.Database.Database;
-import com.example.babybuy.Model.CatDataModel;
+import com.example.babybuy.DataModels.CatDataModel;
 import com.example.babybuy.R;
 
 import java.io.ByteArrayOutputStream;
@@ -38,104 +38,91 @@ import java.util.ArrayList;
 public class HomeFragment extends Fragment {
 
     public HomeFragment() {
-        // Required empty public constructor
     }
 
     //Variable for Recyclerview and Adapter
-    RecyclerView recycler_category;
-    CategoryAdapter catadapter;
-    ArrayList<CatDataModel> allcatdata;
+    RecyclerView recycler_cat;
+    CategoryAdapter category_adapter;
+    ArrayList<CatDataModel> cat_data;
     final int CAMERA_CODE = 100;
     final int GALLERY_CODE = 200;
-    TextView cataddcamera, cataddgallery;
-    ImageView cataddimage;
-    ImageSlider catmainimage;
-    FloatingActionButton  addnewcat;
+    TextView catimgcamera, catimggallery;
+    ImageView catimg;
+    ImageSlider catmainimg;
+    FloatingActionButton add_cat;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.category_list, container, false);
 
-        //Insert category button
-        addnewcat = view.findViewById(R.id.cataddbtn);
+        add_cat = view.findViewById(R.id.btnaddcatego);
 
 
 
-        //Add new cateogry
-        addnewcat.setOnClickListener(v -> {
-            //call insert method
+        //for adding new category
+        add_cat.setOnClickListener(v -> {
             addnewcategorydailoge();
         });
 
 
-
-        //recycler view for category
-        recycler_category = view.findViewById(R.id.recy_view_cat);
-        recycler_category.setHasFixedSize(false);
+        recycler_cat = view.findViewById(R.id.recy_view_cat);
+        recycler_cat.setHasFixedSize(false);
         GridLayoutManager grid = new GridLayoutManager(getContext(), 1, GridLayoutManager.VERTICAL, false);
 
-        //set layout manager for recycler view
-        recycler_category.setLayoutManager(grid);
+        recycler_cat.setLayoutManager(grid);
 
-        //CategoryListAdapter object
-        catadapter = new CategoryAdapter(getContext(), catdata());
-        //set Recyclerview to Adapter
-        recycler_category.setAdapter(catadapter);
+        category_adapter = new CategoryAdapter(getContext(), catdata());
+        recycler_cat.setAdapter(category_adapter);
 
         return view;
     }
 
-    //method to get category item from database
     private ArrayList<CatDataModel> catdata() {
         Database catdb = new Database(getActivity());
-        allcatdata = catdb.categoryfetchdata();
-        return allcatdata;
+        cat_data = catdb.categoryfetchdata();
+        return cat_data;
     }
-
-    //method to add new category
     private void addnewcategorydailoge() {
         AlertDialog.Builder addcat = new AlertDialog.Builder(getActivity(), R.style.YourThemeName);
 
         View viewalert = LayoutInflater.from(getActivity()).inflate(R.layout.add_category, null);
-        cataddgallery = viewalert.findViewById(R.id.cataddfromgallery);
-        cataddcamera = viewalert.findViewById(R.id.cataddfromcamera);
-        cataddimage = viewalert.findViewById(R.id.catimgid);
+        catimggallery = viewalert.findViewById(R.id.imgcatgallery);
+        catimgcamera = viewalert.findViewById(R.id.imgcatcam);
+        catimg = viewalert.findViewById(R.id.categoimgid);
         addcat.setCancelable(true);
         addcat.setView(viewalert);
-        EditText newcategoryname = viewalert.findViewById(R.id.edittextcatname);
+        EditText newcategoryname = viewalert.findViewById(R.id.catnamedit);
 
-        //add product image from gallery
-        cataddgallery.setOnClickListener(v -> {
-            Intent igallery = new Intent(Intent.ACTION_PICK);
-            igallery.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-            startActivityForResult(igallery, GALLERY_CODE);
+        //choose item image from gallery
+        catimggallery.setOnClickListener(v -> {
+            Intent intgallery = new Intent(Intent.ACTION_PICK);
+            intgallery.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            startActivityForResult(intgallery, GALLERY_CODE);
         });
 
-        //add product image from camera
-        cataddcamera.setOnClickListener(v -> {
-            Intent icamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            startActivityForResult(icamera, CAMERA_CODE);
+        //choose item image from camera
+        catimgcamera.setOnClickListener(v -> {
+            Intent intcamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            startActivityForResult(intcamera, CAMERA_CODE);
         });
 
-        //new category add button
+        //add new category button
         addcat.setPositiveButton("add", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Database db_cat = new Database(getActivity());
-                long insertCat = db_cat.categoryadd(newcategoryname.getText().toString(), convertImageViewToByteArray(cataddimage));
+                long insertCat = db_cat.categoryadd(newcategoryname.getText().toString(), convertImageViewToByteArray(catimg));
                 if (insertCat == -1) {
                     Toast.makeText(getActivity(), "Failed to Update", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(getActivity(), "Successfully Updated", Toast.LENGTH_SHORT).show();
                     // Collections.reverse(allcatdata);
                     CategoryAdapter adapter = new CategoryAdapter(getContext(), catdata());
-                    recycler_category.setAdapter(adapter);
+                    recycler_cat.setAdapter(adapter);
                 }
             }
         });
-        //cancel button
         addcat.setNegativeButton("Cancel", null);
         addcat.create().show();
     }
@@ -147,10 +134,10 @@ public class HomeFragment extends Fragment {
             if (requestCode == CAMERA_CODE) {
                 //for camera
                 Bitmap img = (Bitmap) (data.getExtras().get("data"));
-                cataddimage.setImageBitmap(img);
+                catimg.setImageBitmap(img);
             } else if (requestCode == GALLERY_CODE) {
                 //for gallery
-                cataddimage.setImageURI(data.getData());
+                catimg.setImageURI(data.getData());
             }
         }
     }
